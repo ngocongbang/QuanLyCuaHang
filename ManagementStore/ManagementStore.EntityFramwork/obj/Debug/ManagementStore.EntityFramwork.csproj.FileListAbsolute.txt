@@ -1,0 +1,9 @@
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\ManagementStore.EntityFramwork.dll.config
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\ManagementStore.EntityFramwork.dll
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\ManagementStore.EntityFramwork.pdb
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.dll
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.SqlServer.dll
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.xml
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.SqlServer.xml
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\obj\Debug\ManagementStore.EntityFramwork.dll
+E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\obj\Debug\ManagementStore.EntityFramwork.pdb

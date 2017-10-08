@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BangAn_2017ModelStoreContainer" CdmEntityContainer="BangAn_2017Entities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="BangAn_2017Model.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="BangAn_2017Model.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="BangAn_2017Model.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="BangAn_2017Model.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="BangAn_2017Model.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Branch">
+        <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+          <ScalarProperty Name="Branch_Name" ColumnName="Branch_Name" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="CommuneWard" ColumnName="CommuneWard" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Employee_Code" ColumnName="Employee_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Possition" ColumnName="Possition" />
+          <ScalarProperty Name="Private_ID" ColumnName="Private_ID" />
+          <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupItems">
+      <EntityTypeMapping TypeName="BangAn_2017Model.GroupItem">
+        <MappingFragment StoreEntitySet="GroupItem">
+          <ScalarProperty Name="GroupItem_ID" ColumnName="GroupItem_ID" />
+          <ScalarProperty Name="GroupItem_Code" ColumnName="GroupItem_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupItem_Sub">
+      <EntityTypeMapping TypeName="BangAn_2017Model.GroupItem_Sub">
+        <MappingFragment StoreEntitySet="GroupItem_Sub">
+          <ScalarProperty Name="GroupItemSub_ID" ColumnName="GroupItemSub_ID" />
+          <ScalarProperty Name="GroupItemSub_Code" ColumnName="GroupItemSub_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GroupItem_ID" ColumnName="GroupItem_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Input_Item_DT">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Input_Item_DT">
+        <MappingFragment StoreEntitySet="Input_Item_DT">
+          <ScalarProperty Name="Input_Item_DT_ID" ColumnName="Input_Item_DT_ID" />
+          <ScalarProperty Name="Input_Item_MS_ID" ColumnName="Input_Item_MS_ID" />
+          <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
+          <ScalarProperty Name="Item_Unit" ColumnName="Item_Unit" />
+          <ScalarProperty Name="AmountSaleOf" ColumnName="AmountSaleOf" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Input_Item_MS">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Input_Item_MS">
+        <MappingFragment StoreEntitySet="Input_Item_MS">
+          <ScalarProperty Name="Input_Item_MS_ID" ColumnName="Input_Item_MS_ID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+          <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AmountDebit" ColumnName="AmountDebit" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoice_Item_DT">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Invoice_Item_DT">
+        <MappingFragment StoreEntitySet="Invoice_Item_DT">
+          <ScalarProperty Name="Invoice_Item_DT_ID" ColumnName="Invoice_Item_DT_ID" />
+          <ScalarProperty Name="Invoice_Item_MS_ID" ColumnName="Invoice_Item_MS_ID" />
+          <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
+          <ScalarProperty Name="Item_Unit" ColumnName="Item_Unit" />
+          <ScalarProperty Name="AmountSaleOf" ColumnName="AmountSaleOf" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoice_Item_MS">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Invoice_Item_MS">
+        <MappingFragment StoreEntitySet="Invoice_Item_MS">
+          <ScalarProperty Name="Invoice_Item_MS_ID" ColumnName="Invoice_Item_MS_ID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Branch_ID" ColumnName="Branch_ID" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Item">
+        <MappingFragment StoreEntitySet="Item">
+          <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GroupItem_ID" ColumnName="GroupItem_ID" />
+          <ScalarProperty Name="GroupItem_Sub_ID" ColumnName="GroupItem_Sub_ID" />
+          <ScalarProperty Name="AmountSale" ColumnName="AmountSale" />
+          <ScalarProperty Name="AmountOrigin" ColumnName="AmountOrigin" />
+          <ScalarProperty Name="Blance" ColumnName="Blance" />
+          <ScalarProperty Name="Item_Color_ID" ColumnName="Item_Color_ID" />
+          <ScalarProperty Name="Item_Material_ID" ColumnName="Item_Material_ID" />
+          <ScalarProperty Name="Item_Size_ID" ColumnName="Item_Size_ID" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="AmountShip" ColumnName="AmountShip" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Item_Color">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Item_Color">
+        <MappingFragment StoreEntitySet="Item_Color">
+          <ScalarProperty Name="Item_Color_ID" ColumnName="Item_Color_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Item_Size">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Item_Size">
+        <MappingFragment StoreEntitySet="Item_Size">
+          <ScalarProperty Name="Item_Size1" ColumnName="Item_Size" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BangAn_2017Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tranfer_Item_DT">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Tranfer_Item_DT">
+        <MappingFragment StoreEntitySet="Tranfer_Item_DT">
+          <ScalarProperty Name="Tranfer_Item_DT_ID" ColumnName="Tranfer_Item_DT_ID" />
+          <ScalarProperty Name="Tranfer_Item_MS_ID" ColumnName="Tranfer_Item_MS_ID" />
+          <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+          <ScalarProperty Name="Item_Code" ColumnName="Item_Code" />
+          <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+          <ScalarProperty Name="Item_Count" ColumnName="Item_Count" />
+          <ScalarProperty Name="AmountPrice" ColumnName="AmountPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tranfer_Item_MS">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Tranfer_Item_MS">
+        <MappingFragment StoreEntitySet="Tranfer_Item_MS">
+          <ScalarProperty Name="Tranfer_Item_MS_ID" ColumnName="Tranfer_Item_MS_ID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Branch_Receipt_ID" ColumnName="Branch_Receipt_ID" />
+          <ScalarProperty Name="Branch_Sender_ID" ColumnName="Branch_Sender_ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendors">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Vendor">
+        <MappingFragment StoreEntitySet="Vendor">
+          <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+          <ScalarProperty Name="Vendor_Code" ColumnName="Vendor_Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+          <ScalarProperty Name="Tax_Code" ColumnName="Tax_Code" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="CommuneWard" ColumnName="CommuneWard" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Group_Vendor" ColumnName="Group_Vendor" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Item_Material">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Item_Material">
+        <MappingFragment StoreEntitySet="Item_Material">
+          <ScalarProperty Name="Item_Material_ID" ColumnName="Item_Material_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="BangAn_2017Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

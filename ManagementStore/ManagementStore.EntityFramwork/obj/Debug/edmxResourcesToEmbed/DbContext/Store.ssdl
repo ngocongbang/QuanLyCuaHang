@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BangAn_2017Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="Branch_ID" />
+    </Key>
+    <Property Name="Branch_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Branch_Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Region" Type="nvarchar" MaxLength="500" />
+    <Property Name="CommuneWard" Type="nvarchar" MaxLength="500" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Country_ID" />
+    </Key>
+    <Property Name="Country_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Customer_ID" />
+    </Key>
+    <Property Name="Customer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="Category" Type="nchar" MaxLength="10" />
+    <Property Name="Company_Name" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Employee_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Phone" Type="nchar" MaxLength="15" />
+    <Property Name="Possition" Type="char" MaxLength="10" />
+    <Property Name="Private_ID" Type="char" MaxLength="20" />
+    <Property Name="Branch_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="GroupItem">
+    <Key>
+      <PropertyRef Name="GroupItem_ID" />
+    </Key>
+    <Property Name="GroupItem_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupItem_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="GroupItem_Sub">
+    <Key>
+      <PropertyRef Name="GroupItemSub_ID" />
+    </Key>
+    <Property Name="GroupItemSub_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroupItemSub_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupItem_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Image_ID" />
+    </Key>
+    <Property Name="Image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Input_Item_DT">
+    <Key>
+      <PropertyRef Name="Input_Item_DT_ID" />
+    </Key>
+    <Property Name="Input_Item_DT_ID" Type="int" Nullable="false" />
+    <Property Name="Input_Item_MS_ID" Type="int" />
+    <Property Name="Item_ID" Type="int" />
+    <Property Name="Item_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Count" Type="int" />
+    <Property Name="Item_Unit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AmountSaleOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Input_Item_MS">
+    <Key>
+      <PropertyRef Name="Input_Item_MS_ID" />
+    </Key>
+    <Property Name="Input_Item_MS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Vendor_ID" Type="int" />
+    <Property Name="Branch_ID" Type="int" />
+    <Property Name="Employee_ID" Type="int" />
+    <Property Name="Status" Type="char" MaxLength="10" />
+    <Property Name="AmountDebit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Type" Type="bit" />
+  </EntityType>
+  <EntityType Name="Invoice_Item_DT">
+    <Key>
+      <PropertyRef Name="Invoice_Item_DT_ID" />
+    </Key>
+    <Property Name="Invoice_Item_DT_ID" Type="int" Nullable="false" />
+    <Property Name="Invoice_Item_MS_ID" Type="int" />
+    <Property Name="Item_ID" Type="int" />
+    <Property Name="Item_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Count" Type="int" />
+    <Property Name="Item_Unit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AmountSaleOf" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Invoice_Item_MS">
+    <Key>
+      <PropertyRef Name="Invoice_Item_MS_ID" />
+    </Key>
+    <Property Name="Invoice_Item_MS_ID" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Customer_ID" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Branch_ID" Type="int" />
+    <Property Name="Employee_ID" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalCount" Type="int" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="Item_ID" />
+    </Key>
+    <Property Name="Item_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Item_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupItem_ID" Type="int" />
+    <Property Name="GroupItem_Sub_ID" Type="int" />
+    <Property Name="AmountSale" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AmountOrigin" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Blance" Type="int" />
+    <Property Name="Item_Color_ID" Type="int" />
+    <Property Name="Item_Material_ID" Type="int" />
+    <Property Name="Item_Size_ID" Type="int" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+    <Property Name="AmountShip" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Item_Color">
+    <Key>
+      <PropertyRef Name="Item_Color_ID" />
+    </Key>
+    <Property Name="Item_Color_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Item_Image">
+          <Property Name="Image_ID" Type="int" />
+          <Property Name="Item_ID" Type="int" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'BangAn_2017.dbo.Item_Material' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Item_Material">
+    <Key>
+      <PropertyRef Name="Item_Material_ID" />
+    </Key>
+    <Property Name="Item_Material_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Item_Size">
+    <Key>
+      <PropertyRef Name="Item_Size" />
+    </Key>
+    <Property Name="Item_Size" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tranfer_Item_DT">
+    <Key>
+      <PropertyRef Name="Tranfer_Item_DT_ID" />
+    </Key>
+    <Property Name="Tranfer_Item_DT_ID" Type="int" Nullable="false" />
+    <Property Name="Tranfer_Item_MS_ID" Type="int" />
+    <Property Name="Item_ID" Type="int" />
+    <Property Name="Item_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Item_Count" Type="int" />
+    <Property Name="AmountPrice" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Tranfer_Item_MS">
+    <Key>
+      <PropertyRef Name="Tranfer_Item_MS_ID" />
+    </Key>
+    <Property Name="Tranfer_Item_MS_ID" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Branch_Receipt_ID" Type="int" />
+    <Property Name="Branch_Sender_ID" Type="int" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Employee_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="Vendor_ID" />
+    </Key>
+    <Property Name="Vendor_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vendor_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Company_Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Tax_Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="char" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Region" Type="nvarchar" MaxLength="500" />
+    <Property Name="CommuneWard" Type="nvarchar" MaxLength="250" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Group_Vendor" Type="nchar" MaxLength="10" />
+    <Property Name="Note" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="Branch_ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="Branch_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupItemSub_GroupItemSub">
+    <End Role="GroupItem" Type="Self.GroupItem" Multiplicity="0..1" />
+    <End Role="GroupItem_Sub" Type="Self.GroupItem_Sub" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupItem">
+        <PropertyRef Name="GroupItem_ID" />
+      </Principal>
+      <Dependent Role="GroupItem_Sub">
+        <PropertyRef Name="GroupItem_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BangAn_2017ModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupItem" EntityType="Self.GroupItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupItem_Sub" EntityType="Self.GroupItem_Sub" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Input_Item_DT" EntityType="Self.Input_Item_DT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Input_Item_MS" EntityType="Self.Input_Item_MS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice_Item_DT" EntityType="Self.Invoice_Item_DT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice_Item_MS" EntityType="Self.Invoice_Item_MS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item_Color" EntityType="Self.Item_Color" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item_Size" EntityType="Self.Item_Size" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tranfer_Item_DT" EntityType="Self.Tranfer_Item_DT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tranfer_Item_MS" EntityType="Self.Tranfer_Item_MS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item_Material" EntityType="Self.Item_Material" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Item_Material].[Item_Material_ID] AS [Item_Material_ID], 
+    [Item_Material].[Name] AS [Name]
+    FROM [dbo].[Item_Material] AS [Item_Material]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Branch" Association="Self.FK_Employee_Branch">
+      <End Role="Branch" EntitySet="Branch" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupItemSub_GroupItemSub" Association="Self.FK_GroupItemSub_GroupItemSub">
+      <End Role="GroupItem" EntitySet="GroupItem" />
+      <End Role="GroupItem_Sub" EntitySet="GroupItem_Sub" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

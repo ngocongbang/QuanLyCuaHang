@@ -1,0 +1,11 @@
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\ManagementStore.Business.dll
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\ManagementStore.Business.pdb
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\EntityFramework.dll
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\log4net.dll
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\EntityFramework.xml
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\log4net.xml
+E:\LearnDev\ManagementStore\ManagementStore.Business\obj\Debug\ManagementStore.Business.csprojResolveAssemblyReference.cache
+E:\LearnDev\ManagementStore\ManagementStore.Business\obj\Debug\ManagementStore.Business.dll
+E:\LearnDev\ManagementStore\ManagementStore.Business\obj\Debug\ManagementStore.Business.pdb
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\ManagementStore.EntityFramwork.dll
+E:\LearnDev\ManagementStore\ManagementStore.Business\bin\Debug\ManagementStore.EntityFramwork.pdb
