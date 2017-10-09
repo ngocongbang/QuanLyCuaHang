@@ -7,3 +7,12 @@ E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFrame
 E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.SqlServer.xml
 E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\obj\Debug\ManagementStore.EntityFramwork.dll
 E:\LearnDev\ManagementStore\ManagementStore.EntityFramwork\obj\Debug\ManagementStore.EntityFramwork.pdb
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\ManagementStore.EntityFramwork.dll.config
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\ManagementStore.EntityFramwork.dll
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\ManagementStore.EntityFramwork.pdb
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.dll
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.SqlServer.dll
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.xml
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\bin\Debug\EntityFramework.SqlServer.xml
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\obj\Debug\ManagementStore.EntityFramwork.dll
+D:\QuanLyKho\QuanLyCuaHang\ManagementStore\ManagementStore.EntityFramwork\obj\Debug\ManagementStore.EntityFramwork.pdb
