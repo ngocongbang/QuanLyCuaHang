@@ -6,8 +6,7 @@ using System.Web.Mvc;
 
 namespace ManagementStore.Controllers
 {
-     //[BasicAuthenticationAttribute("your-username", "your-password",
-     //  BasicRealm = "your-realm")]
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

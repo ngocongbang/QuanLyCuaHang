@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -340,7 +341,7 @@
                             </li>
 
                             <li>
-                                <a href="profile.html">
+                                <a href="profile.htmlprofile.html">
                                     <i class="ace-icon fa fa-user"></i>
                                     Profile
                                 </a>
@@ -348,11 +349,18 @@
 
                             <li class="divider"></li>
 
-                            <li>
-                                <a href="#">
-                                    <i class="ace-icon fa fa-power-off"></i>
-                                    Logout
-                                </a>
+                            <li> 
+                                @Html.ActionLink("Log off", "LogOff", "Account", routeValues:null, htmlAttributes: new { @class= "ace-icon fa fa-cog" })                
+                               
+                                        @*<a href="profile.html">
+                                            <i class="ace-icon fa fa-cog"></i>Log off</a>*@ 
+                                        @*<ul class="nav navbar-nav navbar-right">
+                                            <li>
+                                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                            </li>
+                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                        </ul>*@
+                              
                             </li>
                         </ul>
                     </li>
