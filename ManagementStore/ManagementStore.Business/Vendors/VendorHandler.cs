@@ -4,6 +4,8 @@ using ManagementStore.EntityFramwork.DbContext;
 using ManagementStore.Business.Common.Enums;
 using ManagementStore.Business.Common.Constants;
 using ManagementStore.EntityFramwork.Responsitory;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ManagementStore.Business.Vendors
 {
@@ -78,6 +80,38 @@ namespace ManagementStore.Business.Vendors
             catch (Exception ex)
             {
                 return new Response<VendorModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
+            }
+        }
+
+        public Response<List<VendorModel>> GetVendors()
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpVendor = unitOfWorkStore.GetRepository<Vendor>();
+                    var listVendorEntity = rpVendor.GetAll();
+                    var listVendorModel = (from vendor in listVendorEntity
+                                           select new VendorModel()
+                                          {
+                                              Vendor_ID = vendor.Vendor_ID,
+                                              Vendor_Code = vendor.Vendor_Code,
+                                              Name = vendor.Name,
+                                              Tax_Code = vendor.Tax_Code,
+                                              Phone = vendor.Phone,
+                                              Address = vendor.Address,
+                                              Region = vendor.Region,
+                                              CommuneWard = vendor.CommuneWard,
+                                              Email = vendor.Email,
+                                              Group_Vendor = vendor.Group_Vendor,
+                                              Note = vendor.Note
+                                          }).ToList();                    
+                    return new Response<List<VendorModel>>((int)StatusResponses.Success, MessageResConst.Success, listVendorModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<VendorModel>>((int)StatusResponses.ErrorSystem, ex.Message, null);               
             }
         }
     }
