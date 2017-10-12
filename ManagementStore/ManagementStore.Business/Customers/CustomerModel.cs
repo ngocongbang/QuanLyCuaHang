@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManagementStore.Business.Vendors
+namespace ManagementStore.Business.Customers
 {
    public class CustomerModel
     {

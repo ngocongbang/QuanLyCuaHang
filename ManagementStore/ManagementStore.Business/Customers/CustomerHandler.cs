@@ -6,7 +6,7 @@ using ManagementStore.Business.Common.Constants;
 using ManagementStore.EntityFramwork.Responsitory;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementStore.Business.Vendors;
+using ManagementStore.Business.Customers;
 
 namespace ManagementStore.Business.Customers
 {
@@ -81,7 +81,7 @@ namespace ManagementStore.Business.Customers
             }
         }
 
-        public Response<List<CustomerModel>> GetCustomers()
+        public Response<List<CustomerModel>> GetCustomers(int pageSize, int pageCurrent)
         {
             try
             {
@@ -102,6 +102,7 @@ namespace ManagementStore.Business.Customers
                                                  Category = Customer.Category,
                                                  Company_Name = Customer.Company_Name
                                              }).ToList();
+                    listCustomerModel =listCustomerModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
                     return new Response<List<CustomerModel>>((int)StatusResponses.Success, MessageResConst.Success, listCustomerModel);
                 }
             }
