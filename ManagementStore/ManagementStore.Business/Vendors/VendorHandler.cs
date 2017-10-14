@@ -13,7 +13,7 @@ namespace ManagementStore.Business.Vendors
     {
         private ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IDatabaseFactory dbFactory = new DatabaseFactory();
-
+        // hàm insert dữ liệu
         public Response<VendorModel> InsertVendor(VendorModel vendorModel)
         {
             try
@@ -50,7 +50,44 @@ namespace ManagementStore.Business.Vendors
                 return new Response<VendorModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
             }
         }
-
+        // Hàm update dữ liệu
+        public Response<VendorModel> UpdateVendor(VendorModel vendorModel)
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpVendor = unitOfWorkStore.GetRepository<Vendor>();
+                    Vendor vendorEntity = rpVendor.GetById(vendorModel.Vendor_ID);
+                    vendorEntity.Vendor_ID = vendorModel.Vendor_ID;
+                    vendorEntity.Vendor_Code = vendorModel.Vendor_Code;
+                    vendorEntity.Name = vendorModel.Name;
+                    vendorEntity.Tax_Code = vendorModel.Tax_Code;
+                    vendorEntity.Phone = vendorModel.Phone;
+                    vendorEntity.Address = vendorModel.Address;
+                    vendorEntity.Region = vendorModel.Region;
+                    vendorEntity.CommuneWard = vendorModel.CommuneWard;
+                    vendorEntity.Email = vendorModel.Email;
+                    vendorEntity.Group_Vendor = vendorModel.Group_Vendor;
+                    vendorEntity.Note = vendorModel.Note;
+                    rpVendor.Update(vendorEntity);
+                    if (unitOfWorkStore.Save() >= 1)
+                    {
+                        vendorModel.Vendor_Code = vendorEntity.Vendor_Code;
+                        return new Response<VendorModel>((int)StatusResponses.Success, MessageResConst.Success, vendorModel);
+                    }
+                    else
+                    {
+                        return new Response<VendorModel>((int)StatusResponses.ErrorSystem, MessageResConst.ErrorCommonRequestParam, vendorModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<VendorModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
+            }
+        }
+        // hàm lấy dữ liệu theo id
         public Response<VendorModel> GetVendorByID(int iVendorID)
         {
             try
@@ -82,7 +119,7 @@ namespace ManagementStore.Business.Vendors
                 return new Response<VendorModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
             }
         }
-
+        // tạo hàm lấy tất cả dữ liệu
         public Response<List<VendorModel>> GetVendors()
         {
             try
@@ -112,6 +149,26 @@ namespace ManagementStore.Business.Vendors
             catch (Exception ex)
             {
                 return new Response<List<VendorModel>>((int)StatusResponses.ErrorSystem, ex.Message, null);               
+            }
+        }
+        // tạo hàm xóa 
+        public Response<VendorModel> Delete (int iVendorID)
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpVendor = unitOfWorkStore.GetRepository<Vendor>();
+                    Vendor vendorEntity = rpVendor.GetById(iVendorID);
+                    
+                    rpVendor.Delete(vendorEntity);
+
+                    return new Response<VendorModel>((int)StatusResponses.Success, MessageResConst.Success, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<VendorModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
             }
         }
     }

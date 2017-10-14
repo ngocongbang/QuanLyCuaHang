@@ -87,9 +87,10 @@
             @Html.DisplayFor(modelItem => item.Note)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Update", new { @id = item.Vendor_ID } ) |
+            @Html.ActionLink("Detail", "Detail", new { @id = item.Vendor_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { @id = item.Vendor_ID })
+            @*<a href="/Vendor/Update/@item.Vendor_ID">Sửa</a>*@
         </td>
     </tr>
 }

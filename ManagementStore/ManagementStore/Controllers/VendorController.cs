@@ -48,5 +48,51 @@ namespace ManagementStore.Controllers
             return View(result);
         }
         #endregion==================
+        // chức năng xem chi tiết sản phẩm
+        #region ------------- Chức năng xem chi tiết sản phẩm -------------------
+        public ActionResult Detail(int id)
+        {
+            var detail = vendorHand.GetVendorByID(id);
+            return View(detail.Data);
+        }
+        #endregion --------------------------------------------------------------
+        // Tạo hàm update vendor
+        #region  ---- Update -----
+        public ActionResult Update(int id)
+        {
+            var detail = vendorHand.GetVendorByID(id);
+            return View(detail.Data);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(VendorModel vender)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = vendorHand.UpdateVendor(vender);
+                if (result != null)
+                {
+                    //SetAlert("Sửa thành công", "seccess");
+                    return RedirectToAction("Index", "Vendor");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật user không thành công");
+                }
+            }
+            return View("Index");
+        }
+        #endregion --------------
+
+        // tạo hàm xóa vendor
+        #region ---- Delete ----
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            var result = vendorHand.Delete(id);
+            return RedirectToAction("Index", "Vendor");
+        }
+        #endregion-----------
     }
 }
