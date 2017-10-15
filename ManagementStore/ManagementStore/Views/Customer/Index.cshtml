@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ManagementStore.Business.Customers.CustomerModel>
+﻿@model ManagementStore.Models.CustomerViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,53 +6,164 @@
 }
 
 <h2>Khách Hàng</h2>
+@using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    //Search customer
+    <div class="form-group">
+        <div class="col-md-2 control-label">
+            Mã khách hàng
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.CustomerModel.Customer_Code, new { @class = "form-control" })
+        </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>        
-        <th>
-            Mã KH
-        </th>
-        <th>
-           Tên KH
-        </th>
-        <th>
-            Số ĐT
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-           Địa chỉ
-        </th>       
-       <th></th>
-    </tr>
+        <div class="col-md-2 control-label">
+            Tên khách hàng
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.CustomerModel.Company_Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4"></div>
+        <button type="submit" class="col-md-1 btn btn-success" style="margin-right:10px" onclick="LoadPopupContent()">Tìm kiếm</button>
+        <button type="submit" class="col-md-1 btn btn-warning">Hủy</button>
+        <div class="col-md-4"></div>
+    </div>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Mã KH
+            </th>
+            <th>
+                Tên KH
+            </th>
+            <th>
+                Số ĐT
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>      
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer_Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>        
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+        @foreach (var item in Model.ListCustomerModel)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer_Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="form-group">      
+        <div id="pro_pag2" class="col-md-5">
+            Số bản ghi
+            @Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })
+        </div>
+        <div class="col-md-4">
+            Số trang hiện tại
+            @Html.TextBox("pageCurrent", "1")
+        </div>
+        <button type="submit" class="col-md-1 btn btn-warning" style="margin-right:15px" onclick="Back()">Back</button>
+        <button type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>
+    </div>
+    <script type="text/javascript">
+        //'' khi so ban ghi thay doi
+        function changeListPage() {
+            $('#pagesizelist').on('change', function (event) {
+                var form = $(event.target).parents('form');
+                var bang = $('#pagesizelist').val();
+                form.submit();
+                $('#pageCurrent').val(1);
+            });
+        }
+        // next
+        function Next() {         
+            var b = parseInt($('#pageCurrent').val().toString()) + 1;
+            $('#pageCurrent').val(b);
+        }
+        function Back() {          
+            var b = parseInt($('#pageCurrent').val().toString()) - 1;
+            if (b==0) {
+                b = 1;
+            }
+            $('#pageCurrent').val(b);
+        }
+        //function LoadPopupContent() {            
+        //    var pageSize = $('#pagesizelist').val();
+        //    var pageCurrent = $('#pageCurrent').val();
+        //    var Customer_Code = $('#CustomerModel_Customer_Code').val();
+        //    var Company_Name = $('#CustomerModel_Company_Name').val();
+        //    var customerModel = { Customer_Code: Customer_Code, Company_Name: Company_Name };
+        //    var url = '/Customer/ListCustomer?pageSize=' + pageSize + '&pageCurrent=' + pageCurrent
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: url,
+        //        data: JSON.stringify(customerModel),
+        //        contentType: "application/json; charset=utf-8",
+        //        dataType: "json",
+        //        success: function (data) {
+        //            //if (data.RESULT=="200") {
+        //            //    Model.ListCustomerModel = data.DATA;
+        //            //}
+        //            //else
+        //            //{
+        //            //    alert("Lỗi truy vấn sql");
+        //            //}
+                   
+        //        },
+        //        error: function () {
+        //            alert("That bai");
+        //        }
+        //    }).fail(function (response) {
+        //        alert(response);
+        //    });
+        //    var data = {
+        //        model: {
+        //            UserName: 'Test',
+        //            Password: 'Test',
+        //            RememberMe: true
+        //        }
+        //    };
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Customer/Login/",
+            //    data: JSON.stringify(data),
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (msg) {
+            //        // Do something interesting here.
+            //    }
+            //});
+        //};
+     
+
+    </script>
 }
-
-</table>
