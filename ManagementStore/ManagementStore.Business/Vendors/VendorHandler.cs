@@ -162,8 +162,15 @@ namespace ManagementStore.Business.Vendors
                     Vendor vendorEntity = rpVendor.GetById(iVendorID);
                     
                     rpVendor.Delete(vendorEntity);
-
-                    return new Response<VendorModel>((int)StatusResponses.Success, MessageResConst.Success, null);
+                    //unitOfWorkStore.Save();
+                    if (unitOfWorkStore.Save() >= 1)
+                    {
+                        return new Response<VendorModel>((int)StatusResponses.Success, MessageResConst.Success, null);
+                    }
+                    else
+                    {
+                        return new Response<VendorModel>((int)StatusResponses.ErrorSystem, MessageResConst.ErrorCommonRequestParam, null);
+                    }
                 }
             }
             catch (Exception ex)
