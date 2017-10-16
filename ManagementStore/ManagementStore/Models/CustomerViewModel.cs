@@ -9,6 +9,8 @@ namespace ManagementStore.Models
     public class CustomerViewModel
     {
         public IEnumerable<CustomerModel> ListCustomerModel { get; set; }
+        public string DisplayPage { get; set; }
+        public int CountPage { get; set; }
         public CustomerModel CustomerModel { get; set; }
     }
 }

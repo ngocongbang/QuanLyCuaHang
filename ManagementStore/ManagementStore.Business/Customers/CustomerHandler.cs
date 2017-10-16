@@ -64,7 +64,7 @@ namespace ManagementStore.Business.Customers
                     {
                         Customer_ID = obCustomer.Customer_ID,
                         Customer_Code = obCustomer.Customer_Code,
-                        Name = obCustomer.Name,                    
+                        Name = obCustomer.Name,
                         Phone = obCustomer.Phone,
                         Email = obCustomer.Email,
                         Address = obCustomer.Address,
@@ -102,13 +102,14 @@ namespace ManagementStore.Business.Customers
                                                  Category = Customer.Category,
                                                  Company_Name = Customer.Company_Name
                                              }).ToList();
-                    listCustomerModel =listCustomerModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
-                    return new Response<List<CustomerModel>>((int)StatusResponses.Success, MessageResConst.Success, listCustomerModel);
+                    int countData = listCustomerModel.Count;
+                    listCustomerModel = listCustomerModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
+                    return new Response<List<CustomerModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listCustomerModel);
                 }
             }
             catch (Exception ex)
             {
-                return new Response<List<CustomerModel>>((int)StatusResponses.ErrorSystem, ex.Message, null);
+                return new Response<List<CustomerModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
             }
         }
     }

@@ -27,6 +27,9 @@ namespace ManagementStore.Controllers
             var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent);
             CustomerViewModel viewModel = new CustomerViewModel();
             viewModel.ListCustomerModel = listCustomer.Data;
+            int size = listCustomer.CountData / (int)pageSize + 1;
+            viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
+            viewModel.CountPage = size;
             return View(viewModel);
         }
         [HttpPost]
@@ -42,7 +45,10 @@ namespace ManagementStore.Controllers
             }
             var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent);
             CustomerViewModel viewModel = new CustomerViewModel();
-            viewModel.ListCustomerModel = listCustomer.Data;           
+            viewModel.ListCustomerModel = listCustomer.Data;
+            int size = listCustomer.CountData / (int)pageSize + 1;
+            viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
+            viewModel.CountPage = size;
             return View(viewModel);
 
 

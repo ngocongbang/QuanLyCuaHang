@@ -81,18 +81,28 @@
 
     </table>
 
-    <div class="form-group">      
+    <div class="form-group">
         <div id="pro_pag2" class="col-md-5">
             Số bản ghi
-            @Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })
+            @Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "5", 5 }, { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })
         </div>
         <div class="col-md-4">
             Số trang hiện tại
-            @Html.TextBox("pageCurrent", "1")
+            @*@if (Model.CountData > 0)
+                {
+                    string count = Model.CountData.ToString();
+                    @Html.TextBox("pageCurrent", count)
+                }*@
+            @Html.DisplayFor(Model => Model.DisplayPage)
         </div>
-        <button type="submit" class="col-md-1 btn btn-warning" style="margin-right:15px" onclick="Back()">Back</button>
-        <button type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>
+        <button id="back" type="submit" class="col-md-1 btn btn-warning" style="margin-right:15px" onclick="Back()">Back</button>
+        <button id="next" type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>       
     </div>
+    <div style="display:none">
+        @Html.TextBox("pageCurrent", "1")
+        <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
+    </div>
+
     <script type="text/javascript">
         //'' khi so ban ghi thay doi
         function changeListPage() {
@@ -104,18 +114,22 @@
             });
         }
         // next
-        function Next() {         
+        function Next() {
             var b = parseInt($('#pageCurrent').val().toString()) + 1;
-            $('#pageCurrent').val(b);
+            var itotalpage = parseInt($('#totalPage').text()) ;
+            $('#pageCurrent').val(b);            
+            if (itotalpage <= b) {
+                $('#pageCurrent').val(itotalpage);
+            }
         }
-        function Back() {          
+        function Back() {
             var b = parseInt($('#pageCurrent').val().toString()) - 1;
-            if (b==0) {
+            if (b == 0) {
                 b = 1;
             }
             $('#pageCurrent').val(b);
         }
-        //function LoadPopupContent() {            
+        //function LoadPopupContent() {
         //    var pageSize = $('#pagesizelist').val();
         //    var pageCurrent = $('#pageCurrent').val();
         //    var Customer_Code = $('#CustomerModel_Customer_Code').val();
@@ -136,7 +150,7 @@
         //            //{
         //            //    alert("Lỗi truy vấn sql");
         //            //}
-                   
+
         //        },
         //        error: function () {
         //            alert("That bai");
@@ -152,18 +166,18 @@
         //        }
         //    };
 
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Customer/Login/",
-            //    data: JSON.stringify(data),
-            //    contentType: "application/json; charset=utf-8",
-            //    dataType: "json",
-            //    success: function (msg) {
-            //        // Do something interesting here.
-            //    }
-            //});
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Customer/Login/",
+        //    data: JSON.stringify(data),
+        //    contentType: "application/json; charset=utf-8",
+        //    dataType: "json",
+        //    success: function (msg) {
+        //        // Do something interesting here.
+        //    }
+        //});
         //};
-     
+
 
     </script>
 }
