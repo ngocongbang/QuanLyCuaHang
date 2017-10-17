@@ -120,7 +120,7 @@ namespace ManagementStore.Business.Vendors
             }
         }
         // tạo hàm lấy tất cả dữ liệu
-        public Response<List<VendorModel>> GetVendors()
+        public Response<List<VendorModel>> GetVendors(int pageSize,int pageCurrent)
         {
             try
             {
@@ -142,7 +142,9 @@ namespace ManagementStore.Business.Vendors
                                               Email = vendor.Email,
                                               Group_Vendor = vendor.Group_Vendor,
                                               Note = vendor.Note
-                                          }).ToList();                    
+                                          }).ToList();
+                    int countData = listVendorModel.Count;
+                    listVendorModel = listVendorModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();    
                     return new Response<List<VendorModel>>((int)StatusResponses.Success, MessageResConst.Success, listVendorModel);
                 }
             }

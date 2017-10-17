@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using ManagementStore.Business;
 using ManagementStore.Business.Vendors;
+using ManagementStore.Business.Common.Constants;
+using ManagementStore.Models;
 
 namespace ManagementStore.Controllers
 {
@@ -17,8 +19,42 @@ namespace ManagementStore.Controllers
         #region Chức năng hiển thị danh sách vendor
         public ActionResult Index()
         {
-            var obj = vendorHand.GetVendors();
-            return View(obj.Data);
+            int? pageSize = null;
+            int? pageCurrent = null;
+            if (pageSize == null)
+            {
+                pageSize = MessageResConst.PageSize;
+            }
+            if (pageCurrent == null)
+            {
+                pageCurrent = 1;
+            }
+            var lstVendor = vendorHand.GetVendors((int)pageSize, (int)pageCurrent);
+            VendorViewModel viewModel = new VendorViewModel();
+            viewModel.ListVendorModel = lstVendor.Data;
+            int size = lstVendor.CountData / (int)pageSize + 1;
+            viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
+            viewModel.CountPage = size;
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult Index(int? pageSize, int? pageCurrent, VendorModel vendorModel)
+        {
+            if (pageSize == null)
+            {
+                pageSize = MessageResConst.PageSize;
+            }
+            if (pageCurrent == null)
+            {
+                pageCurrent = 1;
+            }
+            var lstVendor = vendorHand.GetVendors((int)pageSize, (int)pageCurrent);
+            VendorViewModel viewModel = new VendorViewModel();
+            viewModel.ListVendorModel = lstVendor.Data;
+            int size = lstVendor.CountData / (int)pageSize + 1;
+            viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
+            viewModel.CountPage = size;
+            return View(viewModel);
         }
         #endregion
         // Chức năng tạo mới vendor
@@ -44,8 +80,22 @@ namespace ManagementStore.Controllers
             obj.Email = vendor.Email;
             obj.Group_Vendor = vendor.Group_Vendor;
             obj.Note = vendor.Note;
-            var result = vendorHand.InsertVendor(obj);
-            return View(result);
+            
+            if (ModelState.IsValid)
+            {
+                var result = vendorHand.InsertVendor(obj);
+                if (result != null)
+                {
+                    //SetAlert("Sửa thành công", "seccess");
+                    return RedirectToAction("Index", "Vendor");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm mới vendor không thành công");
+                }
+            }
+            return View("Index");
+
         }
         #endregion==================
         // chức năng xem chi tiết sản phẩm
@@ -87,7 +137,6 @@ namespace ManagementStore.Controllers
 
         // tạo hàm xóa vendor
         #region ---- Delete ----
-        [HttpDelete]
         public ActionResult Delete(int id)
         {
             var result = vendorHand.Delete(id);
