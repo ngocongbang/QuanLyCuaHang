@@ -4,9 +4,22 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
 }
+<style>
+    .handpointer {
+        cursor: pointer;
+        color: blue;
+    }
 
+    .blue {
+        color: yellow;
+    }
+
+    #customerTable th:hover {
+        color:green;
+    }
+</style>
 <h2>Khách Hàng</h2>
-@using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formCustomer" }))
 {
     //Search customer
     <div class="form-group">
@@ -33,21 +46,21 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <table class="table" id="customerTable">
         <tr>
-            <th>
+            <th id="customerid" onclick="orderHeader('Customer_Code')" class="handpointer">
                 Mã KH
             </th>
-            <th>
+            <th id="customername" onclick="orderHeader('Name')" class="handpointer">
                 Tên KH
             </th>
-            <th>
+            <th id="phone" onclick="orderHeader('Phone')" class="handpointer">
                 Số ĐT
             </th>
-            <th>
+            <th id="email" onclick="orderHeader('Email')" class="handpointer">
                 Email
             </th>
-            <th>
+            <th id="address" onclick="orderHeader('Address')" class="handpointer">
                 Địa chỉ
             </th>
             <th></th>
@@ -96,28 +109,34 @@
             @Html.DisplayFor(Model => Model.DisplayPage)
         </div>
         <button id="back" type="submit" class="col-md-1 btn btn-warning" style="margin-right:15px" onclick="Back()">Back</button>
-        <button id="next" type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>       
+        <button id="next" type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>
     </div>
     <div style="display:none">
         @Html.TextBox("pageCurrent", "1")
         <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
+        @Html.TextBox("orderId", "customername")
     </div>
 
     <script type="text/javascript">
         //'' khi so ban ghi thay doi
+        //$('#customerTable').on('click', '.edit', function () {
+        //    var th = $('#tbl1 th').eq($(this).index());
+        //    alert(th.text()); // returns text of respective header
+        //});
+        function orderHeader(order) {
+            $('#orderId').val(order);
+            $('#formCustomer').submit();
+        }
+
         function changeListPage() {
-            $('#pagesizelist').on('change', function (event) {
-                var form = $(event.target).parents('form');
-                var bang = $('#pagesizelist').val();
-                form.submit();
-                $('#pageCurrent').val(1);
-            });
+            $('#pageCurrent').val(1);
+            $('#formCustomer').submit();
         }
         // next
         function Next() {
             var b = parseInt($('#pageCurrent').val().toString()) + 1;
-            var itotalpage = parseInt($('#totalPage').text()) ;
-            $('#pageCurrent').val(b);            
+            var itotalpage = parseInt($('#totalPage').text());
+            $('#pageCurrent').val(b);
             if (itotalpage <= b) {
                 $('#pageCurrent').val(itotalpage);
             }

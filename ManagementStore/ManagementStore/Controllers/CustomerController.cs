@@ -24,7 +24,7 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent);
+            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent,"Name");
             CustomerViewModel viewModel = new CustomerViewModel();
             viewModel.ListCustomerModel = listCustomer.Data;
             int size = listCustomer.CountData / (int)pageSize + 1;
@@ -33,7 +33,7 @@ namespace ManagementStore.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Index(int? pageSize, int? pageCurrent, CustomerModel customerModel)
+        public ActionResult Index(int? pageSize, int? pageCurrent, string orderId, CustomerModel customerModel)
         {
             if (pageSize == null)
             {
@@ -43,7 +43,7 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent);
+            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent, orderId);
             CustomerViewModel viewModel = new CustomerViewModel();
             viewModel.ListCustomerModel = listCustomer.Data;
             int size = listCustomer.CountData / (int)pageSize + 1;

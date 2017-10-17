@@ -81,7 +81,7 @@ namespace ManagementStore.Business.Customers
             }
         }
 
-        public Response<List<CustomerModel>> GetCustomers(int pageSize, int pageCurrent)
+        public Response<List<CustomerModel>> GetCustomers(int pageSize, int pageCurrent, string orderid)
         {
             try
             {
@@ -104,6 +104,27 @@ namespace ManagementStore.Business.Customers
                                              }).ToList();
                     int countData = listCustomerModel.Count;
                     listCustomerModel = listCustomerModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
+                    switch (orderid)
+                    {
+                        case "Customer_Code":
+                            listCustomerModel = listCustomerModel.OrderBy(x => x.Customer_Code).ToList();
+                            break;
+                        case "Name":
+                            listCustomerModel = listCustomerModel.OrderBy(x => x.Name).ToList();
+                            break;
+                        case "Phone":
+                            listCustomerModel = listCustomerModel.OrderBy(x => x.Phone).ToList();
+                            break;
+                        case "Email":
+                            listCustomerModel = listCustomerModel.OrderBy(x => x.Email).ToList();
+                            break;
+                        case "Address":
+                            listCustomerModel = listCustomerModel.OrderBy(x => x.Address).ToList();
+                            break;
+
+                        default:
+                            break;
+                    }
                     return new Response<List<CustomerModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listCustomerModel);
                 }
             }
