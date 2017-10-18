@@ -5,8 +5,7 @@
     Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
 }
 <style>
-    .handpointer {
-        cursor: pointer;
+    .handpointer {      
         color: blue;
     }
 
@@ -14,8 +13,9 @@
         color: yellow;
     }
 
-    #customerTable th:hover {
+    #customerTable th span:hover {
         color:green;
+        cursor:pointer;
     }
 </style>
 <h2>Khách Hàng</h2>
@@ -27,20 +27,20 @@
             Mã khách hàng
         </div>
         <div class="col-md-3">
-            @Html.TextBoxFor(model => model.CustomerModel.Customer_Code, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.CustomerModel.Customer_Code, new { @class = "form-control", id="SearchCustomerCode" })
         </div>
 
         <div class="col-md-2 control-label">
             Tên khách hàng
         </div>
         <div class="col-md-3">
-            @Html.TextBoxFor(model => model.CustomerModel.Company_Name, new { @class = "form-control" })
+            @Html.TextBoxFor(model => model.CustomerModel.Name, new { @class = "form-control",id="SearchCustomerName" })
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-4"></div>
         <button type="submit" class="col-md-1 btn btn-success" style="margin-right:10px" onclick="LoadPopupContent()">Tìm kiếm</button>
-        <button type="submit" class="col-md-1 btn btn-warning">Hủy</button>
+        <button type="submit" class="col-md-1 btn btn-warning" onclick="ResetValue()">Hủy</button>
         <div class="col-md-4"></div>
     </div>
     <p>
@@ -48,20 +48,30 @@
     </p>
     <table class="table" id="customerTable">
         <tr>
-            <th id="customerid" onclick="orderHeader('Customer_Code')" class="handpointer">
+            <th id="customerid" class="handpointer">
+                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Customer_Code', 'decrease')"></span>                         
                 Mã KH
+                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Customer_Code', 'increase')"></span>   
             </th>
-            <th id="customername" onclick="orderHeader('Name')" class="handpointer">
+            <th id="customername"  class="handpointer">
+                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Name', 'decrease')"></span>  
                 Tên KH
+                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Name', 'increase')"></span>  
             </th>
-            <th id="phone" onclick="orderHeader('Phone')" class="handpointer">
+            <th id="phone"  class="handpointer">
+                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>  
                 Số ĐT
+                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>  
             </th>
-            <th id="email" onclick="orderHeader('Email')" class="handpointer">
+            <th id="email"  class="handpointer">
+                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Email', 'decrease')"></span>  
                 Email
+                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Email', 'increase')"></span>  
             </th>
-            <th id="address" onclick="orderHeader('Address')" class="handpointer">
+            <th id="address"  class="handpointer">
+                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Address', 'decrease')"></span>  
                 Địa chỉ
+                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Address', 'increase')"></span>  
             </th>
             <th></th>
         </tr>
@@ -97,7 +107,8 @@
     <div class="form-group">
         <div id="pro_pag2" class="col-md-5">
             Số bản ghi
-            @Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "5", 5 }, { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })
+            @Html.DropDownList("pageSize", new SelectList(ViewBag.PageSize, "NumberID", "NumberValue"), new { id = "pagesizelist", onchange = "changeListPage()" })
+            @*@Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "5", 5 }, { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })*@
         </div>
         <div class="col-md-4">
             Số trang hiện tại
@@ -114,7 +125,8 @@
     <div style="display:none">
         @Html.TextBox("pageCurrent", "1")
         <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
-        @Html.TextBox("orderId", "customername")
+        @Html.TextBox("column", "customername")
+        @Html.TextBox("orderASCorDSC", "customername")
     </div>
 
     <script type="text/javascript">
@@ -123,8 +135,9 @@
         //    var th = $('#tbl1 th').eq($(this).index());
         //    alert(th.text()); // returns text of respective header
         //});
-        function orderHeader(order) {
-            $('#orderId').val(order);
+        function orderHeader(order,down) {
+            $('#column').val(order);
+            $('#orderASCorDSC').val(down);
             $('#formCustomer').submit();
         }
 
@@ -147,6 +160,11 @@
                 b = 1;
             }
             $('#pageCurrent').val(b);
+        }
+        function ResetValue ()
+        {
+            $('#SearchCustomerCode').val(null);
+            $('#SearchCustomerName').val(null);
         }
         //function LoadPopupContent() {
         //    var pageSize = $('#pagesizelist').val();

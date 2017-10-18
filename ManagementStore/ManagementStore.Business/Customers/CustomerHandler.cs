@@ -81,7 +81,7 @@ namespace ManagementStore.Business.Customers
             }
         }
 
-        public Response<List<CustomerModel>> GetCustomers(int pageSize, int pageCurrent, string orderid)
+        public Response<List<CustomerModel>> GetCustomers(int pageSize, int pageCurrent, string orderid, string sortDecOrInc, CustomerModel customer)
         {
             try
             {
@@ -102,24 +102,74 @@ namespace ManagementStore.Business.Customers
                                                  Category = Customer.Category,
                                                  Company_Name = Customer.Company_Name
                                              }).ToList();
+                  
+                    // search
+                    if (customer !=null)
+                    {
+                        if (customer.Customer_Code!=null)
+                        {
+                            listCustomerModel = listCustomerModel.Where(x => x.Customer_Code.Contains(customer.Customer_Code)).ToList();
+                        }
+                        if (customer.Name != null)
+                        {
+                            listCustomerModel = listCustomerModel.Where(x => x.Name.ToLower().Contains(customer.Name.ToLower())).ToList();
+                        }
+                    }
                     int countData = listCustomerModel.Count;
                     listCustomerModel = listCustomerModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
+                    // order
                     switch (orderid)
                     {
                         case "Customer_Code":
-                            listCustomerModel = listCustomerModel.OrderBy(x => x.Customer_Code).ToList();
+                            if (sortDecOrInc== MessageResConst.Increase)
+                            {
+                                listCustomerModel = listCustomerModel.OrderBy(x => x.Customer_Code).ToList();
+                            }
+                            else
+                            {
+                                listCustomerModel = listCustomerModel.OrderByDescending(x => x.Customer_Code).ToList();
+                            }
+                            
                             break;
                         case "Name":
-                            listCustomerModel = listCustomerModel.OrderBy(x => x.Name).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listCustomerModel = listCustomerModel.OrderBy(x => x.Name).ToList();
+                            }
+                            else
+                            {
+                                listCustomerModel = listCustomerModel.OrderByDescending(x => x.Name).ToList();
+                            }
                             break;
                         case "Phone":
-                            listCustomerModel = listCustomerModel.OrderBy(x => x.Phone).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listCustomerModel = listCustomerModel.OrderBy(x => x.Phone).ToList();
+                            }
+                            else
+                            {
+                                listCustomerModel = listCustomerModel.OrderByDescending(x => x.Phone).ToList();
+                            }
                             break;
                         case "Email":
-                            listCustomerModel = listCustomerModel.OrderBy(x => x.Email).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listCustomerModel = listCustomerModel.OrderBy(x => x.Email).ToList();
+                            }
+                            else
+                            {
+                                listCustomerModel = listCustomerModel.OrderByDescending(x => x.Email).ToList();
+                            }
                             break;
                         case "Address":
-                            listCustomerModel = listCustomerModel.OrderBy(x => x.Address).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listCustomerModel = listCustomerModel.OrderBy(x => x.Address).ToList();
+                            }
+                            else
+                            {
+                                listCustomerModel = listCustomerModel.OrderByDescending(x => x.Address).ToList();
+                            }
                             break;
 
                         default:

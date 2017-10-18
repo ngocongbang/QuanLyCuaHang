@@ -3,6 +3,7 @@ using ManagementStore.Business.Customers;
 using ManagementStore.Models;
 using System.Web.Mvc;
 using Newtonsoft.Json;
+using ManagementStore.Utilities;
 
 namespace ManagementStore.Controllers
 {
@@ -24,7 +25,8 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent,"Name");
+            ViewBag.PageSize = ListPageSize.GetListPageSize();
+            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent,"Name", "increase",null);
             CustomerViewModel viewModel = new CustomerViewModel();
             viewModel.ListCustomerModel = listCustomer.Data;
             int size = listCustomer.CountData / (int)pageSize + 1;
@@ -33,7 +35,7 @@ namespace ManagementStore.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Index(int? pageSize, int? pageCurrent, string orderId, CustomerModel customerModel)
+        public ActionResult Index(int? pageSize, int? pageCurrent, string column, string orderASCorDSC, CustomerModel customerModel)
         {
             if (pageSize == null)
             {
@@ -43,7 +45,8 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent, orderId);
+            ViewBag.PageSize = ListPageSize.GetListPageSize();
+            var listCustomer = _customerHandler.GetCustomers((int)pageSize, (int)pageCurrent, column, orderASCorDSC, customerModel);
             CustomerViewModel viewModel = new CustomerViewModel();
             viewModel.ListCustomerModel = listCustomer.Data;
             int size = listCustomer.CountData / (int)pageSize + 1;
