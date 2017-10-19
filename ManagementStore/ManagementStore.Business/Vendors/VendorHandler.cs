@@ -109,7 +109,7 @@ namespace ManagementStore.Business.Vendors
                         CommuneWard = obRestaurant.CommuneWard,
                         Email = obRestaurant.Email,
                         Group_Vendor = obRestaurant.Group_Vendor,
-                        Note = obRestaurant.Note                      
+                        Note = obRestaurant.Note
                     };
                     return new Response<VendorModel>((int)StatusResponses.Success, MessageResConst.Success, vendorModel);
                 }
@@ -120,7 +120,7 @@ namespace ManagementStore.Business.Vendors
             }
         }
         // tạo hàm lấy tất cả dữ liệu
-        public Response<List<VendorModel>> GetVendors(int pageSize,int pageCurrent)
+        public Response<List<VendorModel>> GetVendors(int pageSize, int pageCurrent, string orderid)
         {
             try
             {
@@ -130,31 +130,54 @@ namespace ManagementStore.Business.Vendors
                     var listVendorEntity = rpVendor.GetAll();
                     var listVendorModel = (from vendor in listVendorEntity
                                            select new VendorModel()
-                                          {
-                                              Vendor_ID = vendor.Vendor_ID,
-                                              Vendor_Code = vendor.Vendor_Code,
-                                              Name = vendor.Name,
-                                              Tax_Code = vendor.Tax_Code,
-                                              Phone = vendor.Phone,
-                                              Address = vendor.Address,
-                                              Region = vendor.Region,
-                                              CommuneWard = vendor.CommuneWard,
-                                              Email = vendor.Email,
-                                              Group_Vendor = vendor.Group_Vendor,
-                                              Note = vendor.Note
-                                          }).ToList();
+                                           {
+                                               Vendor_ID = vendor.Vendor_ID,
+                                               Vendor_Code = vendor.Vendor_Code,
+                                               Name = vendor.Name,
+                                               Tax_Code = vendor.Tax_Code,
+                                               Phone = vendor.Phone,
+                                               Address = vendor.Address,
+                                               Region = vendor.Region,
+                                               CommuneWard = vendor.CommuneWard,
+                                               Email = vendor.Email,
+                                               Group_Vendor = vendor.Group_Vendor,
+                                               Note = vendor.Note
+                                           }).ToList();
                     int countData = listVendorModel.Count;
-                    listVendorModel = listVendorModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();    
-                    return new Response<List<VendorModel>>((int)StatusResponses.Success, MessageResConst.Success, listVendorModel);
+                    listVendorModel = listVendorModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
+
+                    switch (orderid)
+                    {
+                        case "Vendor_Code":
+                            listVendorModel = listVendorModel.OrderBy(x => x.Vendor_Code).ToList();
+                            break;
+                        case "Name":
+                            listVendorModel = listVendorModel.OrderBy(x => x.Name).ToList();
+                            break;
+                        case "Phone":
+                            listVendorModel = listVendorModel.OrderBy(x => x.Phone).ToList();
+                            break;
+                        case "Email":
+                            listVendorModel = listVendorModel.OrderBy(x => x.Email).ToList();
+                            break;
+                        case "Address":
+                            listVendorModel = listVendorModel.OrderBy(x => x.Address).ToList();
+                            break;
+
+                        default:
+                            break;
+
+                    }
+                    return new Response<List<VendorModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listVendorModel);
                 }
             }
             catch (Exception ex)
             {
-                return new Response<List<VendorModel>>((int)StatusResponses.ErrorSystem, ex.Message, null);               
+                return new Response<List<VendorModel>>((int)StatusResponses.ErrorSystem, ex.Message, null);
             }
         }
         // tạo hàm xóa 
-        public Response<VendorModel> Delete (int iVendorID)
+        public Response<VendorModel> Delete(int iVendorID)
         {
             try
             {
@@ -162,7 +185,7 @@ namespace ManagementStore.Business.Vendors
                 {
                     var rpVendor = unitOfWorkStore.GetRepository<Vendor>();
                     Vendor vendorEntity = rpVendor.GetById(iVendorID);
-                    
+
                     rpVendor.Delete(vendorEntity);
                     //unitOfWorkStore.Save();
                     if (unitOfWorkStore.Save() >= 1)

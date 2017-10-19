@@ -5,111 +5,103 @@
     Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
 }
 
-<h2>Detail</h2>
-
-<div>
-    <h4>VendorModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Vendor_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vendor_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Vendor_Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Vendor_Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Company_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Company_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tax_Code)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tax_Code)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Region)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Region)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CommuneWard)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CommuneWard)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Group_Vendor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Group_Vendor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-    </dl>
+<div style="width:100%; position:relative;border-style: none none double none; border-color: #b4d0e2; margin-top: -5px; height: 30px;">
+    <div style="width:90%;">
+        <h4 class="box-title cl" style=""><i class="glyphicon glyphicon-list-alt"></i>   <span>Chi tiết nhà cung cấp</span></h4>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div style="clear:both;"></div>
+<div style="margin-top:10px;">
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label" style="font-size:14px;"></div>
+            <div class="col-sm-3 control-label-form">
+                <button id="btnupdate" class="btn btn-success" type="button" title="Alt+U" keyboard key-combo="alt+u" key-combo-pressed="edit()">
+                    <a href="@Url.Action("Update",new { @id = Model.Vendor_ID})">
+                        <span style="color:black;">Cập nhật</span>
+                    </a>
+                </button>
+                <button id="btnupdate" class="btn btn-default" type="button" title="Alt+U" keyboard key-combo="alt+u" key-combo-pressed="edit()">
+                    <a href="@Url.Action("Index")">
+                        <span style="color:black;">Đóng</span>
+                    </a>
+                </button>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label" style="font-size:14px;">Mã nhà cung cấp:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Vendor_Code, new { @class = "control-label col-md-3" })
+            </div>
+            @*email*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Email:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Email, new { @class = "control-label col-md-3" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*Tên nhà cung cấp*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Tên nhà cung cấp:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Name, new { @class = "control-label col-md-3" })
+            </div>
+            @*ten cong ty*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Tên công ty:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Company_Name, new { @class = "control-label col-md-3" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*điện thoại*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Điện thoại:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Phone, new { @class = "control-label col-md-3" })
+            </div>
+            @*Mã số thuế*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Mã số thuế:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Tax_Code, new { @class = "control-label col-md-3" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*Địa chỉ*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Địa chỉ:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Address, new { @class = "control-label col-md-3" })
+            </div>
+            @*Nhóm nhà cung cấp*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Nhóm nhà cung cấp:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Group_Vendor, new { @class = "control-label col-md-3" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*Khu vực*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Vùng miền:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.Region, new { @class = "control-label col-md-3" })
+            </div>
+            @*Xã phường*@
+            <div class="col-sm-2 control-label" style="font-size:14px;">Xã phường:</div>
+            <div class="col-sm-3 control-label-form">
+                @Html.DisplayFor(model => model.CommuneWard, new { @class = "control-label col-md-3" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label" style="font-size:14px;">Ghi chú:</div>
+            <div class="col-sm-8 control-label-form">
+                @Html.DisplayFor(model => model.Note, new { @class = "control-label col-md-3" })
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>
