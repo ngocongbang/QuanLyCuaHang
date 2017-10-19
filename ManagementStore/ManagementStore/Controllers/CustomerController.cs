@@ -4,6 +4,7 @@ using ManagementStore.Models;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using ManagementStore.Utilities;
+using ManagementStore.Business.Common.Enums;
 
 namespace ManagementStore.Controllers
 {
@@ -55,6 +56,67 @@ namespace ManagementStore.Controllers
             return View(viewModel);
 
 
+        }
+        [AllowAnonymous]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CustomerModel customerModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _customerHandler.InsertCustomer(customerModel);
+                if (result.ResponseCode == (int)StatusResponses.Success)
+                {                    
+                    return RedirectToAction("Index", "Customer");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm mới khách hàng không thành công");
+                }
+            }
+            return View("Index");
+
+        }
+        /// <summary>
+        /// Update customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Update(int id)
+        {
+            var detail = _customerHandler.GetCustomerByID(id);
+            return View(detail.Data);
+        }
+
+        /// <summary>
+        /// Update Customer
+        /// </summary>
+        /// <param name="customerModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(CustomerModel customerModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _customerHandler.UpdateCustomer(customerModel);
+                if (result != null)
+                {
+                    //SetAlert("Sửa thành công", "seccess");
+                    return RedirectToAction("Index", "Customer");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật khách hàng thành công");
+                }
+            }
+            return View("Index");
         }
         [HttpPost]
         public JsonResult Login(LoginViewModel model)

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
 }
 <style>
-    .handpointer {      
+    .handpointer {
         color: blue;
     }
 
@@ -13,208 +13,265 @@
         color: yellow;
     }
 
-    #customerTable th span:hover {
-        color:green;
-        cursor:pointer;
+    #customerTable th div div span:hover {
+        color: green;
+        cursor: pointer;
     }
 </style>
-<h2>Khách Hàng</h2>
-@using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formCustomer" }))
-{
-    //Search customer
-    <div class="form-group">
-        <div class="col-md-2 control-label">
-            Mã khách hàng
-        </div>
-        <div class="col-md-3">
-            @Html.TextBoxFor(model => model.CustomerModel.Customer_Code, new { @class = "form-control", id="SearchCustomerCode" })
-        </div>
-
-        <div class="col-md-2 control-label">
-            Tên khách hàng
-        </div>
-        <div class="col-md-3">
-            @Html.TextBoxFor(model => model.CustomerModel.Name, new { @class = "form-control",id="SearchCustomerName" })
-        </div>
+<div style="width:100%; position:relative;border-style: none none double none; border-color: #b4d0e2; margin-top: -5px; height: 30px;">
+    <div style="width:90%;">
+        <h4 class="box-title cl" style=""><i class="glyphicon glyphicon-list-alt"></i>   <span>Danh sách khách hàng</span></h4>
     </div>
-    <div class="form-group">
-        <div class="col-md-4"></div>
-        <button type="submit" class="col-md-1 btn btn-success" style="margin-right:10px" onclick="LoadPopupContent()">Tìm kiếm</button>
-        <button type="submit" class="col-md-1 btn btn-warning" onclick="ResetValue()">Hủy</button>
-        <div class="col-md-4"></div>
+    <div style="position:absolute; top: 1px; right:28px;">
+        <a href="@Url.Action("Create")"><i style="font-size:19px;" class="glyphicon glyphicon-edit" title="Thêm mới khách hàng"></i></a>
+        <a href="" ng-click="refresh()"><i style="font-size:19px;" class="fa fa-refresh" title="Refresh"></i></a>
     </div>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table" id="customerTable">
-        <tr>
-            <th id="customerid" class="handpointer">
-                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Customer_Code', 'decrease')"></span>                         
-                Mã KH
-                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Customer_Code', 'increase')"></span>   
-            </th>
-            <th id="customername"  class="handpointer">
-                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Name', 'decrease')"></span>  
-                Tên KH
-                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Name', 'increase')"></span>  
-            </th>
-            <th id="phone"  class="handpointer">
-                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>  
-                Số ĐT
-                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>  
-            </th>
-            <th id="email"  class="handpointer">
-                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Email', 'decrease')"></span>  
-                Email
-                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Email', 'increase')"></span>  
-            </th>
-            <th id="address"  class="handpointer">
-                <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Address', 'decrease')"></span>  
-                Địa chỉ
-                <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Address', 'increase')"></span>  
-            </th>
-            <th></th>
-        </tr>
+</div>
+<div style="clear:both;"></div>
+<div style="margin-top:10px;">
+    @using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formCustomer" }))
+    {
+        //Search customer
+        <div class="form-group">
+            <div class="col-md-2 control-label">
+                Mã khách hàng
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.CustomerModel.Customer_Code, new { @class = "form-control", id = "SearchCustomerCode" })
+            </div>
 
-        @foreach (var item in Model.ListCustomerModel)
-        {
+            <div class="col-md-2 control-label">
+                Tên khách hàng
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.CustomerModel.Name, new { @class = "form-control", id = "SearchCustomerName" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <button type="submit" class="col-md-1 btn btn-success" style="margin-right:10px" onclick="LoadPopupContent()">Tìm kiếm</button>
+            <button type="submit" class="col-md-1 btn btn-warning" onclick="ResetValue()">Hủy</button>
+            <div class="col-md-4"></div>
+        </div>
+        <table class="table table-hover table-striped" id="customerTable">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer_Code)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                <th id="customerid" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Customer_Code', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Customer_Code', 'decrease')"></span>
+                        </div>
+                    </div>                   
+                    <div style="float:left ; padding-top:7px"> Mã KH </div>
+                </th>
+                <th id="customername" class="handpointer">                                   
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Name', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Name', 'decrease')"></span>
+                        </div>
+                    </div>                        
+                    <div style="float:left ; padding-top:7px"> Tên KH </div>
+                </th>
+                <th id="phone" class="handpointer">         
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>
+                        </div>
+                    </div>        
+                    <div style="float:left ; padding-top:7px"> Số ĐT </div>
+                </th>
+                <th id="email" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Email', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Email', 'decrease')"></span>
+                        </div>
+                    </div>                      
+                    <div style="float:left ; padding-top:7px"> Email </div>
+                </th>
+                <th id="address" class="handpointer">               
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Address', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Address', 'decrease')"></span>
+
+                        </div>
+                    </div>            
+                    <div style="float:left ; padding-top:7px">  Địa chỉ </div>
+                </th>
+                <th></th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model.ListCustomerModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer_Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        <span>
+                            <a href="@Url.Action("Update",new { @id = item.Customer_ID})">
+                                <img src="~/assets/images/action/edit.png" style="width:17px;" />
+                            </a>
+                        </span>
+                        <span>
+                            <a href="@Url.Action("Detail",new { @id = item.Customer_ID})">
+                                <img src="/assets/images/action/iconDetail.png" style="width:19px;" />
+                            </a>
+                        </span>
+                        <span>
+                            <a href="@Url.Action("Delete",new { @id = item.Customer_ID})">
+                                <img src="/assets/images/action/Delete_Icon.png" style="width:23px;" />
+                            </a>
+                        </span>
+                    </td>
 
-    <div class="form-group">
-        <div id="pro_pag2" class="col-md-5">
-            Số bản ghi
-            @Html.DropDownList("pageSize", new SelectList(ViewBag.PageSize, "NumberID", "NumberValue"), new { id = "pagesizelist", onchange = "changeListPage()" })
-            @*@Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "5", 5 }, { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })*@
-        </div>
-        <div class="col-md-4">
-            Số trang hiện tại
-            @*@if (Model.CountData > 0)
-                {
-                    string count = Model.CountData.ToString();
-                    @Html.TextBox("pageCurrent", count)
-                }*@
-            @Html.DisplayFor(Model => Model.DisplayPage)
-        </div>
-        <button id="back" type="submit" class="col-md-1 btn btn-warning" style="margin-right:15px" onclick="Back()">Back</button>
-        <button id="next" type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>
-    </div>
-    <div style="display:none">
-        @Html.TextBox("pageCurrent", "1")
-        <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
-        @Html.TextBox("column", "customername")
-        @Html.TextBox("orderASCorDSC", "customername")
-    </div>
-
-    <script type="text/javascript">
-        //'' khi so ban ghi thay doi
-        //$('#customerTable').on('click', '.edit', function () {
-        //    var th = $('#tbl1 th').eq($(this).index());
-        //    alert(th.text()); // returns text of respective header
-        //});
-        function orderHeader(order,down) {
-            $('#column').val(order);
-            $('#orderASCorDSC').val(down);
-            $('#formCustomer').submit();
-        }
-
-        function changeListPage() {
-            $('#pageCurrent').val(1);
-            $('#formCustomer').submit();
-        }
-        // next
-        function Next() {
-            var b = parseInt($('#pageCurrent').val().toString()) + 1;
-            var itotalpage = parseInt($('#totalPage').text());
-            $('#pageCurrent').val(b);
-            if (itotalpage <= b) {
-                $('#pageCurrent').val(itotalpage);
+                </tr>
             }
-        }
-        function Back() {
-            var b = parseInt($('#pageCurrent').val().toString()) - 1;
-            if (b == 0) {
-                b = 1;
+
+        </table>
+
+        <div class="form-group">
+            <div id="pro_pag2" class="col-md-5">
+                Số bản ghi
+                @Html.DropDownList("pageSize", new SelectList(ViewBag.PageSize, "NumberID", "NumberValue"), new { id = "pagesizelist", onchange = "changeListPage()" })
+                @*@Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "5", 5 }, { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })*@
+            </div>
+            <div class="col-md-5">
+                Số trang hiện tại
+                @*@if (Model.CountData > 0)
+                    {
+                        string count = Model.CountData.ToString();
+                        @Html.TextBox("pageCurrent", count)
+                    }*@
+                @Html.DisplayFor(Model => Model.DisplayPage)
+            </div>
+            @*<button id="back" type="submit" class="col-md-1 btn btn-warning" style="margin-right:15px" onclick="Back()">Back</button>
+            <button id="next" type="submit" class="col-md-1 btn btn info" onclick="Next()">Next</button>*@
+            <button id="back" type="submit" class="col-md-1 btn-next" style="margin-right:15px;width:50px;" onclick="Back()">
+                <img src="/assets/images/action/prev.png" style="width:18px;" />
+            </button>
+            <button id="next" type="submit" class="col-md-1 btn-prev" style="width:50px;" onclick="Next()">
+                <img src="/assets/images/action/next.png" style="width:18px;" />
+            </button>
+        </div>
+        <div style="display:none">
+            @Html.TextBox("pageCurrent", "1")
+            <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
+            @Html.TextBox("column", "customername")
+            @Html.TextBox("orderASCorDSC", "customername")
+        </div>
+
+        <script type="text/javascript">
+            //'' khi so ban ghi thay doi
+            //$('#customerTable').on('click', '.edit', function () {
+            //    var th = $('#tbl1 th').eq($(this).index());
+            //    alert(th.text()); // returns text of respective header
+            //});
+            function orderHeader(order, down) {
+                $('#column').val(order);
+                $('#orderASCorDSC').val(down);
+                $('#formCustomer').submit();
             }
-            $('#pageCurrent').val(b);
-        }
-        function ResetValue ()
-        {
-            $('#SearchCustomerCode').val(null);
-            $('#SearchCustomerName').val(null);
-        }
-        //function LoadPopupContent() {
-        //    var pageSize = $('#pagesizelist').val();
-        //    var pageCurrent = $('#pageCurrent').val();
-        //    var Customer_Code = $('#CustomerModel_Customer_Code').val();
-        //    var Company_Name = $('#CustomerModel_Company_Name').val();
-        //    var customerModel = { Customer_Code: Customer_Code, Company_Name: Company_Name };
-        //    var url = '/Customer/ListCustomer?pageSize=' + pageSize + '&pageCurrent=' + pageCurrent
-        //    $.ajax({
-        //        type: 'POST',
-        //        url: url,
-        //        data: JSON.stringify(customerModel),
-        //        contentType: "application/json; charset=utf-8",
-        //        dataType: "json",
-        //        success: function (data) {
-        //            //if (data.RESULT=="200") {
-        //            //    Model.ListCustomerModel = data.DATA;
-        //            //}
-        //            //else
-        //            //{
-        //            //    alert("Lỗi truy vấn sql");
-        //            //}
 
-        //        },
-        //        error: function () {
-        //            alert("That bai");
-        //        }
-        //    }).fail(function (response) {
-        //        alert(response);
-        //    });
-        //    var data = {
-        //        model: {
-        //            UserName: 'Test',
-        //            Password: 'Test',
-        //            RememberMe: true
-        //        }
-        //    };
+            function changeListPage() {
+                $('#pageCurrent').val(1);
+                $('#formCustomer').submit();
+            }
+            // next
+            function Next() {
+                var b = parseInt($('#pageCurrent').val().toString()) + 1;
+                var itotalpage = parseInt($('#totalPage').text());
+                $('#pageCurrent').val(b);
+                if (itotalpage <= b) {
+                    $('#pageCurrent').val(itotalpage);
+                }
+            }
+            function Back() {
+                var b = parseInt($('#pageCurrent').val().toString()) - 1;
+                if (b == 0) {
+                    b = 1;
+                }
+                $('#pageCurrent').val(b);
+            }
+            function ResetValue() {
+                $('#SearchCustomerCode').val(null);
+                $('#SearchCustomerName').val(null);
+            }
+            //function LoadPopupContent() {
+            //    var pageSize = $('#pagesizelist').val();
+            //    var pageCurrent = $('#pageCurrent').val();
+            //    var Customer_Code = $('#CustomerModel_Customer_Code').val();
+            //    var Company_Name = $('#CustomerModel_Company_Name').val();
+            //    var customerModel = { Customer_Code: Customer_Code, Company_Name: Company_Name };
+            //    var url = '/Customer/ListCustomer?pageSize=' + pageSize + '&pageCurrent=' + pageCurrent
+            //    $.ajax({
+            //        type: 'POST',
+            //        url: url,
+            //        data: JSON.stringify(customerModel),
+            //        contentType: "application/json; charset=utf-8",
+            //        dataType: "json",
+            //        success: function (data) {
+            //            //if (data.RESULT=="200") {
+            //            //    Model.ListCustomerModel = data.DATA;
+            //            //}
+            //            //else
+            //            //{
+            //            //    alert("Lỗi truy vấn sql");
+            //            //}
 
-        //$.ajax({
-        //    type: "POST",
-        //    url: "/Customer/Login/",
-        //    data: JSON.stringify(data),
-        //    contentType: "application/json; charset=utf-8",
-        //    dataType: "json",
-        //    success: function (msg) {
-        //        // Do something interesting here.
-        //    }
-        //});
-        //};
+            //        },
+            //        error: function () {
+            //            alert("That bai");
+            //        }
+            //    }).fail(function (response) {
+            //        alert(response);
+            //    });
+            //    var data = {
+            //        model: {
+            //            UserName: 'Test',
+            //            Password: 'Test',
+            //            RememberMe: true
+            //        }
+            //    };
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Customer/Login/",
+            //    data: JSON.stringify(data),
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (msg) {
+            //        // Do something interesting here.
+            //    }
+            //});
+            //};
 
 
-    </script>
-}
+        </script>
+    }
+</div>
