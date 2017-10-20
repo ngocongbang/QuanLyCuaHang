@@ -51,6 +51,42 @@ namespace ManagementStore.Business.Customers
             }
         }
 
+        public Response<CustomerModel> UpdateCustomer(CustomerModel CustomerModel)
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+
+                    var rpCustomer = unitOfWorkStore.GetRepository<Customer>();
+                    Customer CustomerEntity = rpCustomer.GetById(CustomerModel.Customer_ID);
+                    CustomerEntity.Customer_ID = CustomerModel.Customer_ID;
+                    CustomerEntity.Customer_Code = CustomerModel.Customer_Code;
+                    CustomerEntity.Name = CustomerModel.Name;
+                    CustomerEntity.Phone = CustomerModel.Phone;
+                    CustomerEntity.Email = CustomerModel.Email;
+                    CustomerEntity.Address = CustomerModel.Address;
+                    CustomerEntity.Birthday = CustomerModel.Birthday;
+                    CustomerEntity.Category = CustomerModel.Category;
+                    CustomerEntity.Company_Name = CustomerModel.Company_Name;
+                    rpCustomer.Update(CustomerEntity);
+                    if (unitOfWorkStore.Save() >= 1)
+                    {
+                        CustomerModel.Customer_Code = CustomerEntity.Customer_Code;
+                        return new Response<CustomerModel>((int)StatusResponses.Success, MessageResConst.Success, CustomerModel);
+                    }
+                    else
+                    {
+                        return new Response<CustomerModel>((int)StatusResponses.ErrorSystem, MessageResConst.ErrorCommonRequestParam, CustomerModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<CustomerModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
+            }
+        }
+
         public Response<CustomerModel> GetCustomerByID(int iCustomerID)
         {
             try
