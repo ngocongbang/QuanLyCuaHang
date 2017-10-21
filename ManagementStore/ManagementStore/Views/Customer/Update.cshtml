@@ -25,59 +25,72 @@
                 </div>
             </div>
             <div class="form-group" style="display:none;">
-                <div class="col-md-2 control-label" style="font-size:14px;">Mã KH:</div>
+                <div class="col-md-2 control-label">Mã KH:</div>
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.Customer_ID, new { @class = "form-control col-md-3" })
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-2 control-label" style="font-size:14px;">Mã khách hàng:</div>              
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Customer_Code, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Customer_Code, "", new { @class = "text-danger" })
+            <div class="col-sm-2" style="background-color:rebeccapurple; height: 800px"> ah</div>
+            <div class="col-sm-10">
+                <div class="form-group">
+                    <div class="col-sm-2 control-label lable-font-size">Loại khách hàng:</div>
+                    <div class="col-sm-3">
+                        @Html.RadioButtonFor(model => model.Category, "1", new { id = "private" })
+                        @Html.Label("Cá nhân", "Cá nhân")
+                        <span>     </span>
+                        @Html.RadioButtonFor(model => model.Category, "2", new { id = "company", @class = "radio-with" })
+                        @Html.Label("Công ty", "Công ty")
+                    </div>
                 </div>
-                @*email*@
-                <div class="col-md-2 control-label" style="font-size:14px;">Email:</div>              
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-sm-2 control-label" style="font-size:14px;">Mã khách hàng:</div>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(model => model.Customer_Code, new { @class = "form-control col-sm-3" })
+                        @Html.ValidationMessageFor(model => model.Customer_Code, "", new { @class = "text-danger" })
+                    </div>
+                    @*email*@
+                    <div class="col-sm-2 control-label" style="font-size:14px;">Email:</div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control col-md-3" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @*Tên khách hàng*@
-                <div class="col-md-2 control-label" style="font-size:14px;">Tên khách hàng:</div>         
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*Tên khách hàng*@
+                    <div class="col-md-2 control-label" style="font-size:14px;">Tên khách hàng:</div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-3" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    @*ten cong ty*@
+                    <div class="col-md-2 control-label" style="font-size:14px;">Tên công ty:</div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Company_Name, new { @class = "form-control col-md-3" })
+                        @Html.ValidationMessageFor(model => model.Company_Name, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                @*ten cong ty*@
-                <div class="col-md-2 control-label" style="font-size:14px;">Tên công ty:</div>             
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Company_Name, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Company_Name, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*điện thoại*@
+                    <div class="col-md-2 control-label" style="font-size:14px;">Điện thoại:</div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control col-md-3" })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @*điện thoại*@
-                <div class="col-md-2 control-label" style="font-size:14px;">Điện thoại:</div>              
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                </div>                 
-            </div>
 
-            <div class="form-group">
-                @*Địa chỉ*@
-                <div class="col-md-2 control-label" style="font-size:14px;">Địa chỉ:</div>              
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                </div>
-                @*Loại khách hàng*@
-                <div class="col-md-2 control-label" style="font-size:14px;">Loại khách hàng:</div>               
-                <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Category, new { @class = "form-control col-md-3" })
-                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*Địa chỉ*@
+                    <div class="col-md-2 control-label" style="font-size:14px;">Địa chỉ:</div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control col-md-3" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                    @*Loại khách hàng*@
+                    <div class="col-md-2 control-label" style="font-size:14px;">Loại khách hàng:</div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Category, new { @class = "form-control col-md-3" })
+                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>

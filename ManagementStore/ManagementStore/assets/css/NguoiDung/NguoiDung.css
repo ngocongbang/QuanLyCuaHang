@@ -50,3 +50,12 @@
 .table{
     border:1px solid #E4E6E9;
 }
+ /*danh muc dung chung*/ 
+ .lable-font-size{
+     font-size: 14px;
+     font-weight: bolder;
+ }
+ /*khoang cach radio*/
+  .radio-with{
+    margin-left:10px;
+ }

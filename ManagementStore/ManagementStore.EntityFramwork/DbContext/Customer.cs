@@ -23,5 +23,9 @@ namespace ManagementStore.EntityFramwork.DbContext
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Category { get; set; }
         public string Company_Name { get; set; }
+        public string Tax_Code { get; set; }
+        public string Url { get; set; }
+        public string Sex { get; set; }
+        public string Note { get; set; }
     }
 }

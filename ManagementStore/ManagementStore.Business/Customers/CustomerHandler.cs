@@ -21,7 +21,6 @@ namespace ManagementStore.Business.Customers
             {
                 using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
                 {
-
                     var rpCustomer = unitOfWorkStore.GetRepository<Customer>();
                     Customer CustomerEntity = new Customer();
                     CustomerEntity.Customer_ID = CustomerModel.Customer_ID;
@@ -33,6 +32,10 @@ namespace ManagementStore.Business.Customers
                     CustomerEntity.Birthday = CustomerModel.Birthday;
                     CustomerEntity.Category = CustomerModel.Category;
                     CustomerEntity.Company_Name = CustomerModel.Company_Name;
+                    CustomerEntity.Tax_Code = CustomerModel.Tax_Code;
+                    CustomerEntity.Url = CustomerModel.Url;
+                    CustomerEntity.Sex = CustomerModel.Sex;
+                    CustomerEntity.Note = CustomerModel.Note;
                     rpCustomer.Add(CustomerEntity);
                     if (unitOfWorkStore.Save() >= 1)
                     {
@@ -69,6 +72,10 @@ namespace ManagementStore.Business.Customers
                     CustomerEntity.Birthday = CustomerModel.Birthday;
                     CustomerEntity.Category = CustomerModel.Category;
                     CustomerEntity.Company_Name = CustomerModel.Company_Name;
+                    CustomerEntity.Tax_Code = CustomerModel.Tax_Code;
+                    CustomerEntity.Url = CustomerModel.Url;
+                    CustomerEntity.Sex = CustomerModel.Sex;
+                    CustomerEntity.Note = CustomerModel.Note;
                     rpCustomer.Update(CustomerEntity);
                     if (unitOfWorkStore.Save() >= 1)
                     {
@@ -105,8 +112,12 @@ namespace ManagementStore.Business.Customers
                         Email = obCustomer.Email,
                         Address = obCustomer.Address,
                         Birthday = obCustomer.Birthday,
-                        Category = obCustomer.Category,
-                        Company_Name = obCustomer.Company_Name
+                        Category = obCustomer.Category.Trim(),
+                        Company_Name = obCustomer.Company_Name,
+                        Tax_Code = obCustomer.Tax_Code,
+                        Url = obCustomer.Url,
+                        Sex = obCustomer.Sex,
+                        Note = obCustomer.Note,
                     };
                     return new Response<CustomerModel>((int)StatusResponses.Success, MessageResConst.Success, CustomerModel);
                 }
@@ -136,13 +147,17 @@ namespace ManagementStore.Business.Customers
                                                  Address = Customer.Address,
                                                  Birthday = Customer.Birthday,
                                                  Category = Customer.Category,
-                                                 Company_Name = Customer.Company_Name
+                                                 Company_Name = Customer.Company_Name,
+                                                 Tax_Code = Customer.Tax_Code,
+                                                 Url = Customer.Url,
+                                                 Sex = Customer.Sex,
+                                                 Note = Customer.Note
                                              }).ToList();
-                  
+
                     // search
-                    if (customer !=null)
+                    if (customer != null)
                     {
-                        if (customer.Customer_Code!=null)
+                        if (customer.Customer_Code != null)
                         {
                             listCustomerModel = listCustomerModel.Where(x => x.Customer_Code.Contains(customer.Customer_Code)).ToList();
                         }
@@ -157,7 +172,7 @@ namespace ManagementStore.Business.Customers
                     switch (orderid)
                     {
                         case "Customer_Code":
-                            if (sortDecOrInc== MessageResConst.Increase)
+                            if (sortDecOrInc == MessageResConst.Increase)
                             {
                                 listCustomerModel = listCustomerModel.OrderBy(x => x.Customer_Code).ToList();
                             }
@@ -165,7 +180,7 @@ namespace ManagementStore.Business.Customers
                             {
                                 listCustomerModel = listCustomerModel.OrderByDescending(x => x.Customer_Code).ToList();
                             }
-                            
+
                             break;
                         case "Name":
                             if (sortDecOrInc == MessageResConst.Increase)
