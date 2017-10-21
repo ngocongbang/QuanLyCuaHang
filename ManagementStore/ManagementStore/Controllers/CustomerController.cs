@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using ManagementStore.Utilities;
 using ManagementStore.Business.Common.Enums;
+using System.IO;
+using System;
 
 namespace ManagementStore.Controllers
 {
@@ -105,6 +107,27 @@ namespace ManagementStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                // xy ly file
+                var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                    try
+                    {
+                        string path = System.IO.Path.Combine(Server.MapPath("~/assets/images/customers"),
+                           Path.GetFileName(file.FileName));
+                          
+                        file.SaveAs(path);
+                        customerModel.Url = "~/assets/images/customers/" + file.FileName;
+                        ViewBag.Message = "Your message for success";
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+                else
+                {
+                    ViewBag.Message = "Please select file";
+                }            
+
                 var result = _customerHandler.UpdateCustomer(customerModel);
                 if (result != null)
                 {

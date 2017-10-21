@@ -13,7 +13,7 @@
 <div style="clear:both;"></div>
 <div style="margin-top:10px;">
 
-    @using (Html.BeginForm("Update", "Customer", FormMethod.Post))
+    @using (Html.BeginForm("Update", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
@@ -30,73 +30,110 @@
                     @Html.TextBoxFor(model => model.Customer_ID, new { @class = "form-control col-md-3" })
                 </div>
             </div>
-            <div class="col-sm-2" style="background-color:rebeccapurple; height: 800px"> ah</div>
+            <!-- Image -->
+            <div class="col-sm-2">
+                <img id="id-mage-customer" src="@Url.Content(Model.Url)"width="150" height="200"/>
+                <label for="files" class="btn" style="margin-top: 10px; margin-left:40px">Chọn ảnh</label>
+                <input id="files" style="visibility:hidden;" type="file" name="fileimage" onchange="readURL(this);">
+            </div>
+            <!-- Infor -->
             <div class="col-sm-10">
                 <div class="form-group">
                     <div class="col-sm-2 control-label lable-font-size">Loại khách hàng:</div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 radio-padding-top8">
                         @Html.RadioButtonFor(model => model.Category, "1", new { id = "private" })
-                        @Html.Label("Cá nhân", "Cá nhân")
-                        <span>     </span>
-                        @Html.RadioButtonFor(model => model.Category, "2", new { id = "company", @class = "radio-with" })
+                        @Html.Label("Cá nhân", "Cá nhân")                   
+                        @Html.RadioButtonFor(model => model.Category, "2", new { id = "company" })
                         @Html.Label("Công ty", "Công ty")
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-2 control-label" style="font-size:14px;">Mã khách hàng:</div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 control-label lable-font-size">Mã khách hàng:</div>
+                    <div class="col-sm-3">
                         @Html.TextBoxFor(model => model.Customer_Code, new { @class = "form-control col-sm-3" })
                         @Html.ValidationMessageFor(model => model.Customer_Code, "", new { @class = "text-danger" })
                     </div>
                     @*email*@
-                    <div class="col-sm-2 control-label" style="font-size:14px;">Email:</div>
+                    <div class="col-sm-2 control-label lable-font-size">Mã số thuế:</div>
                     <div class="col-sm-3">
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control col-md-3" })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Tax_Code, new { @class = "form-control col-sm-3" })
+                        @Html.ValidationMessageFor(model => model.Tax_Code, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @*Tên khách hàng*@
-                    <div class="col-md-2 control-label" style="font-size:14px;">Tên khách hàng:</div>
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-3" })
+                    <div class="col-sm-2 control-label lable-font-size">Tên khách hàng:</div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-sm-3" })
                         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     </div>
-                    @*ten cong ty*@
-                    <div class="col-md-2 control-label" style="font-size:14px;">Tên công ty:</div>
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.Company_Name, new { @class = "form-control col-md-3" })
-                        @Html.ValidationMessageFor(model => model.Company_Name, "", new { @class = "text-danger" })
+                    @*gioi tinh*@
+                    <div class="col-sm-2 control-label lable-font-size">Giới tính:</div>
+                    <div class="col-sm-3 radio-padding-top8">
+                        @Html.RadioButtonFor(model => model.Sex, "1", new { id = "boy" })
+                        @Html.Label("Nam", "Nam")                       
+                        @Html.RadioButtonFor(model => model.Sex, "2", new { id = "girl" })
+                        @Html.Label("Nữ", "Nữ")
                     </div>
                 </div>
                 <div class="form-group">
                     @*điện thoại*@
-                    <div class="col-md-2 control-label" style="font-size:14px;">Điện thoại:</div>
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control col-md-3" })
+                    <div class="col-sm-2 control-label lable-font-size">Điện thoại:</div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control col-sm-3" })
                         @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-2 control-label lable-font-size">Email:</div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control col-sm-3" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
+                    @*ngày sinh*@
+                    <div class="col-sm-2 control-label lable-font-size">Ngày sinh:</div>
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control col-sm-3" })
+                        @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
+                    </div>
                     @*Địa chỉ*@
-                    <div class="col-md-2 control-label" style="font-size:14px;">Địa chỉ:</div>
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control col-md-3" })
+                    <div class="col-sm-2 control-label lable-font-size">Địa chỉ</div>
+                    <div class="col-sm-5">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control col-sm-5" })
                         @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                     </div>
-                    @*Loại khách hàng*@
-                    <div class="col-md-2 control-label" style="font-size:14px;">Loại khách hàng:</div>
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.Category, new { @class = "form-control col-md-3" })
-                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
-                    </div>
                 </div>
+                <div class="form-group">
+                    @*ngày sinh*@
+                    <div class="col-sm-2 control-label lable-font-size">Ghi chú:</div>
+                    <div class="col-sm-10">
+                        @Html.TextAreaFor(model => model.Note, new { @class = "form-control col-sm-10 note-height200"})
+                        @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
             </div>
+            <!-- end Infor -->
         </div>
     }
 
-    <div>
+    @*<div>
         @Html.ActionLink("DS khách hàng", "Index")
-    </div>
+    </div>*@
 </div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#id-mage-customer').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

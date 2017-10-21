@@ -73,7 +73,7 @@ namespace ManagementStore.Business.Customers
                     CustomerEntity.Category = CustomerModel.Category;
                     CustomerEntity.Company_Name = CustomerModel.Company_Name;
                     CustomerEntity.Tax_Code = CustomerModel.Tax_Code;
-                    CustomerEntity.Url = CustomerModel.Url;
+                    CustomerEntity.Url = CustomerModel.Url==null? CustomerEntity.Url : CustomerModel.Url;
                     CustomerEntity.Sex = CustomerModel.Sex;
                     CustomerEntity.Note = CustomerModel.Note;
                     rpCustomer.Update(CustomerEntity);
@@ -115,8 +115,8 @@ namespace ManagementStore.Business.Customers
                         Category = obCustomer.Category.Trim(),
                         Company_Name = obCustomer.Company_Name,
                         Tax_Code = obCustomer.Tax_Code,
-                        Url = obCustomer.Url,
-                        Sex = obCustomer.Sex,
+                        Url = obCustomer.Url == null? "#": obCustomer.Url,
+                        Sex = obCustomer.Sex == null? "1":obCustomer.Sex,
                         Note = obCustomer.Note,
                     };
                     return new Response<CustomerModel>((int)StatusResponses.Success, MessageResConst.Success, CustomerModel);
