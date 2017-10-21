@@ -1,0 +1,8 @@
+-- 21/10/17 bangnc 
+ALTER TABLE Customer
+ADD   
+	Tax_Code nvarchar(250),
+	Url      nvarchar(250),
+	Sex	     nchar(1),
+	Note     nvarchar(250)
+-----------------------------------
