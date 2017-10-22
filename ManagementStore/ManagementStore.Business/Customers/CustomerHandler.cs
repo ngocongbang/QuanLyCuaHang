@@ -111,8 +111,8 @@ namespace ManagementStore.Business.Customers
                         Phone = obCustomer.Phone,
                         Email = obCustomer.Email,
                         Address = obCustomer.Address,
-                        //Birthday = obCustomer.Birthday.t
-                        Category = obCustomer.Category.Trim(),
+                        Birthday = obCustomer.Birthday,
+                        Category = obCustomer.Category ==null? "1": obCustomer.Category.Trim(),
                         Company_Name = obCustomer.Company_Name,
                         Tax_Code = obCustomer.Tax_Code,
                         Url = obCustomer.Url == null? "#": obCustomer.Url,
