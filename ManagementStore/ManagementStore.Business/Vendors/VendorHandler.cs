@@ -120,7 +120,7 @@ namespace ManagementStore.Business.Vendors
             }
         }
         // tạo hàm lấy tất cả dữ liệu
-        public Response<List<VendorModel>> GetVendors(int pageSize, int pageCurrent, string orderid)
+        public Response<List<VendorModel>> GetVendors(int pageSize, int pageCurrent, string  orderid, string sortDecOrInc, VendorModel venDor)
         {
             try
             {
@@ -143,25 +143,77 @@ namespace ManagementStore.Business.Vendors
                                                Group_Vendor = vendor.Group_Vendor,
                                                Note = vendor.Note
                                            }).ToList();
+
+                    // search
+                    if (venDor != null)
+                    {
+                        if (venDor.Vendor_Code != null)
+                        {
+                            listVendorModel = listVendorModel.Where(x => x.Vendor_Code.Contains(venDor.Vendor_Code)).ToList();
+                        }
+                        if (venDor.Name != null)
+                        {
+                            listVendorModel = listVendorModel.Where(x => x.Name.ToLower().Contains(venDor.Name.ToLower())).ToList();
+                        }
+                    }
+                   
+
                     int countData = listVendorModel.Count;
                     listVendorModel = listVendorModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
 
+                    // order
                     switch (orderid)
                     {
                         case "Vendor_Code":
-                            listVendorModel = listVendorModel.OrderBy(x => x.Vendor_Code).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listVendorModel = listVendorModel.OrderBy(x => x.Vendor_Code).ToList();
+                            }
+                            else
+                            {
+                                listVendorModel = listVendorModel.OrderByDescending(x => x.Vendor_Code).ToList();
+                            }
+
                             break;
                         case "Name":
-                            listVendorModel = listVendorModel.OrderBy(x => x.Name).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listVendorModel = listVendorModel.OrderBy(x => x.Name).ToList();
+                            }
+                            else
+                            {
+                                listVendorModel = listVendorModel.OrderByDescending(x => x.Name).ToList();
+                            }
                             break;
                         case "Phone":
-                            listVendorModel = listVendorModel.OrderBy(x => x.Phone).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listVendorModel = listVendorModel.OrderBy(x => x.Phone).ToList();
+                            }
+                            else
+                            {
+                                listVendorModel = listVendorModel.OrderByDescending(x => x.Phone).ToList();
+                            }
                             break;
                         case "Email":
-                            listVendorModel = listVendorModel.OrderBy(x => x.Email).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listVendorModel = listVendorModel.OrderBy(x => x.Email).ToList();
+                            }
+                            else
+                            {
+                                listVendorModel = listVendorModel.OrderByDescending(x => x.Email).ToList();
+                            }
                             break;
                         case "Address":
-                            listVendorModel = listVendorModel.OrderBy(x => x.Address).ToList();
+                            if (sortDecOrInc == MessageResConst.Increase)
+                            {
+                                listVendorModel = listVendorModel.OrderBy(x => x.Address).ToList();
+                            }
+                            else
+                            {
+                                listVendorModel = listVendorModel.OrderByDescending(x => x.Address).ToList();
+                            }
                             break;
 
                         default:

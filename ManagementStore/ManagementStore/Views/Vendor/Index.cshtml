@@ -25,44 +25,75 @@
                 Mã khách hàng
             </div>
             <div class="col-md-3">
-                @*@Html.TextBoxFor(model => model.VendorModel., new { @class = "form-control" })*@
+                @Html.TextBoxFor(model => model.VendorModel.Vendor_Code, new { @class = "form-control", id = "SearchVendorCode" })
             </div>
 
             <div class="col-md-2 control-label">
                 Tên khách hàng
             </div>
             <div class="col-md-3">
-                @*@Html.TextBoxFor(model => model.VendorModel.Company_Name, new { @class = "form-control" })*@
+                @Html.TextBoxFor(model => model.VendorModel.Name, new { @class = "form-control", id = "SearchVendorName" })
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-4"></div>
             <button type="submit" class="col-md-1 btn btn-success" style="margin-right:10px" onclick="LoadPopupContent()">Tìm kiếm</button>
-            <button type="submit" class="col-md-1 btn btn-warning">Hủy</button>
+            <button type="submit" class="col-md-1 btn btn-warning" onclick="ResetValue()">Hủy</button>
             <div class="col-md-4"></div>
         </div>
         <table class="table table-hover table-striped">
             <tr>
-                <th id="vendorid" onclick="orderHeader('Vendor_Code')">
-                    Mã nhà cung cấp <i class="selectedCls('Vendor_Code')"></i>
+                <th id="vendorid" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Vendor_Code', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Vendor_Code', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px">
+                        Mã nhà cung cấp
+                    </div>
+
                 </th>
 
-                <th id="vendorname" onclick="orderHeader('Name')">
-                    Tên nhà cung cấp <i class="selectedCls('Name')"></i>
+                <th id="vendorname" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Name', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Name', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px">
+                        Tên nhà cung cấp
+                    </div>
                 </th>
-                <th id="phone" onclick="orderHeader('Phone')">
-                    Số điện thoại <i class="selectedCls('Phone')"></i>
+                <th id="phone" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px">
+                        Số điện thoại <i class="selectedCls('Phone')"></i>
+                    </div>
                 </th>
-                <th id="email" onclick="orderHeader('Email')">
+                <th id="email" class="handpointer">
                     Email <i class="selectedCls('Email')"></i>
                 </th>
-                <th>
+                <th class="handpointer">
                     Nợ cần trả hiện tại
                 </th>
-                <th>
+                <th class="handpointer">
                     Tổng mua
                 </th>
-                <th>
+                <th class="handpointer">
                     Ghi chú
                 </th>
                 <th></th>
@@ -131,7 +162,8 @@
         <div style="display:none">
             @Html.TextBox("pageCurrent", "1")
             <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
-            @Html.TextBox("orderId", "vendorname")
+            @Html.TextBox("column", "vendorname")
+            @Html.TextBox("orderASCorDSC", "vendorname")
         </div>
 
 
@@ -140,6 +172,5 @@
 </div>
 
 @section jsFooter{
-
-    <script src="/assets/js/NguoiDung/Vendor.js"></script>
+    <script src="/Scripts/Vendor/Vendor.js"></script>
 }

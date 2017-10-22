@@ -111,7 +111,7 @@ namespace ManagementStore.Business.Customers
                         Phone = obCustomer.Phone,
                         Email = obCustomer.Email,
                         Address = obCustomer.Address,
-                        Birthday = obCustomer.Birthday,
+                        //Birthday = obCustomer.Birthday.t
                         Category = obCustomer.Category.Trim(),
                         Company_Name = obCustomer.Company_Name,
                         Tax_Code = obCustomer.Tax_Code,

@@ -29,7 +29,7 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            var lstVendor = vendorHand.GetVendors((int)pageSize, (int)pageCurrent, "Name");
+            var lstVendor = vendorHand.GetVendors((int)pageSize, (int)pageCurrent, "Name", "increase", null);
             VendorViewModel viewModel = new VendorViewModel();
             viewModel.ListVendorModel = lstVendor.Data;
             int size = lstVendor.CountData / (int)pageSize + 1;
@@ -38,7 +38,7 @@ namespace ManagementStore.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Index(int? pageSize, int? pageCurrent, string orderId, VendorModel vendorModel)
+        public ActionResult Index(int? pageSize, int? pageCurrent, string column, string orderASCorDSC, VendorModel vendorModel)
         {
             if (pageSize == null)
             {
@@ -48,7 +48,7 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            var lstVendor = vendorHand.GetVendors((int)pageSize, (int)pageCurrent, orderId);
+            var lstVendor = vendorHand.GetVendors((int)pageSize, (int)pageCurrent, column, orderASCorDSC, vendorModel);
             VendorViewModel viewModel = new VendorViewModel();
             viewModel.ListVendorModel = lstVendor.Data;
             int size = lstVendor.CountData / (int)pageSize + 1;
