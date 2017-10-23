@@ -15,6 +15,7 @@ namespace ManagementStore.Business.Customers
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày sinh")]
         public Nullable<System.DateTime> Birthday { get; set; }
