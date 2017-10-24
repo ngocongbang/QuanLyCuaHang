@@ -234,5 +234,29 @@ namespace ManagementStore.Business.Customers
                 return new Response<List<CustomerModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
             }
         }
+        public Response<CustomerModel> Delete(int idCustomer)
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpCustomer = unitOfWorkStore.GetRepository<Customer>();
+                    Customer customerEntity = rpCustomer.GetById(idCustomer);
+                    rpCustomer.Delete(customerEntity);                  
+                    if (unitOfWorkStore.Save() >= 1)
+                    {
+                        return new Response<CustomerModel>((int)StatusResponses.Success, MessageResConst.Success, null);
+                    }
+                    else
+                    {
+                        return new Response<CustomerModel>((int)StatusResponses.ErrorSystem, MessageResConst.ErrorCommonRequestParam, null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<CustomerModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
+            }
+        }
     }
 }

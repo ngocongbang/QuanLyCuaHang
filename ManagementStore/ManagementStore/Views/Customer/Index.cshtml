@@ -144,9 +144,9 @@
                             </a>
                         </span>
                         <span>
-                            <a href="@Url.Action("Delete",new { @id = item.Customer_ID})">
+                            <a href="#"  onclick="DeleteConfirm(@item.Customer_ID, '@item.Name')">
                                 <img src="/assets/images/action/Delete_Icon.png" style="width:23px;" />
-                            </a>
+                            </a>                           
                         </span>
                     </td>
 
@@ -221,6 +221,39 @@
             function ResetValue() {
                 $('#SearchCustomerCode').val(null);
                 $('#SearchCustomerName').val(null);
+            }
+
+            function DeleteConfirm(id, name) {
+                if (id==null) {
+                    alert("Không tồn tại mã khách hàng");
+                    return;
+                }
+                if (confirm("Bạn có muốn xóa khách hàng" + name))
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Customer/Delete?id='+ id,
+                            data: JSON.stringify(),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.RESULT == "200") {
+                                    $('#formCustomer').submit();
+                                }
+                                else
+                                {
+                                    alert("Lỗi truy vấn sql");
+                                }
+
+                            },
+                            error: function () {
+                                alert("Không kết nối được csdl");
+                            }
+                        }).fail(function (response) {
+                            alert(response);
+                        });
+                    
+                else
+                    return false;
             }
             //function LoadPopupContent() {
             //    var pageSize = $('#pagesizelist').val();

@@ -7,6 +7,7 @@ using ManagementStore.Utilities;
 using ManagementStore.Business.Common.Enums;
 using System.IO;
 using System;
+using System.Net;
 
 namespace ManagementStore.Controllers
 {
@@ -140,6 +141,30 @@ namespace ManagementStore.Controllers
                 }
             }
             return View("Index");
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var detail = _customerHandler.GetCustomerByID((int)id);
+            return View(detail.Data);
+        }
+        [HttpPost]
+        public JsonResult Delete(int? id)
+        {
+            if (id==null)
+            {
+                return Json(new { RESULT = "500" });
+            }
+            var result = _customerHandler.Delete((int)id);
+            if (result.ResponseCode == (int)StatusResponses.Success)
+            {
+                return Json(new { RESULT = "200" });
+            }
+            return Json(new { RESULT = "500" });
         }
         [HttpPost]
         public JsonResult Login(LoginViewModel model)
