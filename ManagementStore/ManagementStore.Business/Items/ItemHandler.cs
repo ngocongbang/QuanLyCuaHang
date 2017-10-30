@@ -5,7 +5,7 @@ using ManagementStore.Business.Common.Enums;
 using ManagementStore.Business.Common.Constants;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementStore.EntityFramwork.DbContext;
+using ManagementStore.EntityFramwork.DbContext; 
 
 namespace ManagementStore.Business.Items
 {
