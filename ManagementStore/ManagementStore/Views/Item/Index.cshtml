@@ -1,0 +1,156 @@
+﻿@model ManagementStore.Models.ItemViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
+}
+<style>
+    .handpointer {
+        color: white;
+    }
+
+    .blue {
+        color: yellow;
+    }
+
+    #customerTable th div div span:hover {
+        color: green;
+        cursor: pointer;
+    }
+</style>
+<div style="width:100%; position:relative;border-style: none none double none; border-color: #b4d0e2; margin-top: -5px; height: 30px;">
+    <div style="width:90%;">
+        <h4 class="box-title cl" style=""><i class="glyphicon glyphicon-list-alt"></i>   <span>Danh sách hàng hóa</span></h4>
+    </div>
+    <div style="position:absolute; top: 1px; right:28px;">
+        <a href="@Url.Action("Create")"><i style="font-size:19px;" class="glyphicon glyphicon-edit" title="Thêm mới hàng hóa"></i></a>
+        <a href="" ng-click="refresh()"><i style="font-size:19px;" class="fa fa-refresh" title="Refresh"></i></a>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<div style="margin-top:10px;">
+    @using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formCustomer" }))
+    {<div class="form-group">
+        <div class="col-md-2 control-label">
+            Mã hàng hóa
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.ItemModel.Item_Code, new { @class = "form-control", id = "SearchCustomerCode" })
+        </div>
+
+        <div class="col-md-2 control-label">
+            Tên hàng hóa
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.ItemModel.Name, new { @class = "form-control", id = "SearchCustomerName" })
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-md-4"></div>
+            <button type="submit" class="col-md-1 btn btn-success" style="margin-right:10px" onclick="LoadPopupContent()">Tìm kiếm</button>
+            <button type="submit" class="col-md-1 btn btn-warning" onclick="ResetValue()">Hủy</button>
+            <div class="col-md-4"></div>
+        </div>
+        <table class="table table-hover table-striped">
+            <tr style="background-color:#02a44f">
+                <th id="customerid" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Item_Code', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Item_Code', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px"> Mã hàng hóa </div>
+                </th>
+                <th id="customername" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Name', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Name', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px"> Tên hàng hóa </div>
+
+                </th>
+                <th id="phone" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px"> Giá bán </div>
+                </th>
+                <th id="phone" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px"> Giá vốn </div>
+                </th>
+                <th id="phone" class="handpointer">
+                    <div style="float:left; margin-right:5px">
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-top" onclick="orderHeader('Phone', 'increase')"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-triangle-bottom" onclick="orderHeader('Phone', 'decrease')"></span>
+                        </div>
+                    </div>
+                    <div style="float:left ; padding-top:7px">Tồn kho </div>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.ListItemModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Item_Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AmountSale)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AmountOrigin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AmountShip)
+                    </td>
+                    <td>
+                        <span>
+                            <a href="@Url.Action("Update",new { @id = item.Item_ID})">
+                                <img src="~/assets/images/action/edit.png" style="width:17px;" />
+                            </a>
+                        </span>
+                        <span>
+                            <a href="@Url.Action("Detail",new { @id = item.Item_ID})">
+                                <img src="/assets/images/action/iconDetail.png" style="width:19px;" />
+                            </a>
+                        </span>
+                        <span>
+                            <a href="#" onclick="DeleteConfirm(@item.Item_ID">
+                                <img src="/assets/images/action/Delete_Icon.png" style="width:23px;" />
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>
