@@ -34,6 +34,16 @@ function orderHeader(order, down) {
     debugger
     $('#column').val(order);
     $('#orderASCorDSC').val(down);
+    debugger
+    var dir = down;
+    var col = order;
+    var header = $("th a[href*=" + col + "]");
+    if (down == "increase") {
+        header.text(header.text() + "  ▲");
+    }
+    if (down == "decrease") {
+        header.text(header.text() + "  ▼");
+    }
     $('#formVendor').submit();
 }
 
