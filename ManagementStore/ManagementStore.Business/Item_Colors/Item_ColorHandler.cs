@@ -111,8 +111,16 @@ namespace ManagementStore.Business.Item_Colors
                     // search                   
                     int countData = listItem_ColorModel.Count;
                     listItem_ColorModel = listItem_ColorModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
-                    // order                   
-                    listItem_ColorModel = listItem_ColorModel.OrderBy(x => x.Name).ToList();
+                    // order
+                    if (sortDecOrInc == MessageResConst.Increase)
+                    {
+                        listItem_ColorModel = listItem_ColorModel.OrderBy(x => x.Name).ToList();
+                    }
+                    else
+                    {
+                        listItem_ColorModel = listItem_ColorModel.OrderByDescending(x => x.Name).ToList();
+                    }                
+                    
                     return new Response<List<Item_ColorModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listItem_ColorModel);
                 }
             }
