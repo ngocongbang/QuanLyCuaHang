@@ -234,6 +234,7 @@ namespace ManagementStore.Business.Customers
                 return new Response<List<CustomerModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
             }
         }
+
         public Response<CustomerModel> Delete(int idCustomer)
         {
             try
