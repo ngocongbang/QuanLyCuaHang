@@ -1,4 +1,5 @@
 ﻿using ManagementStore.Business.Common.Constants;
+using ManagementStore.Business.Common.Enums;
 using ManagementStore.Business.Item_Colors;
 using ManagementStore.Models;
 using ManagementStore.Utilities;
@@ -14,6 +15,7 @@ namespace ManagementStore.Controllers
     {
         Item_ColorHandler _item_ColorHandler = new Item_ColorHandler();
         // GET: Item_Color
+        #region --------------- Hàm lấy dữ liệu ---------------------
         public ActionResult Index()
         {
             int? pageSize = null;
@@ -48,7 +50,7 @@ namespace ManagementStore.Controllers
             {
                 pageCurrent = 1;
             }
-            ViewBag.PageSize = ListPageSize.GetListPageSize();          
+            ViewBag.PageSize = ListPageSize.GetListPageSize();
 
             var listItem_Color = _item_ColorHandler.GetItem_Colors((int)pageSize, (int)pageCurrent, column, orderASCorDSC, item_colorModel);
             Item_ColorViewModel viewModel = new Item_ColorViewModel();
@@ -68,5 +70,78 @@ namespace ManagementStore.Controllers
 
 
         }
+
+        #endregion---------------------
+        #region  chức năng tạo mới thuộc tính màu sắc
+        [AllowAnonymous]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Item_ColorModel item_color)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _item_ColorHandler.InsertItem_Color(item_color);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "Item_Color");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm mới màu không thành công!");
+                }
+            }
+            return View("Index");
+        }
+        #endregion
+
+        #region ---------------- Chức năng cập nhật thuộc tính màu sắc ---------------------
+
+        public ActionResult Update(int id)
+        {
+
+            var detail = _item_ColorHandler.GetItem_ColorByID(id);
+            return View(detail.Data);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(Item_ColorModel colorModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _item_ColorHandler.UpdateItem_Color(colorModel);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "Item_Color");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật màu không thành công");
+                }
+            }
+            return View("Index");
+        }
+        #endregion--------------------------------------------------
+        #region ------ Chức năng xóa màu sắc ----------------------
+        [HttpPost]
+        public JsonResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new { RESULT = "500" });
+            }
+            var result = _item_ColorHandler.Delete((int)id);
+            if (result.ResponseCode == (int)StatusResponses.Success)
+            {
+                return Json(new { RESULT = "200" });
+            }
+            return Json(new { RESULT = "500" });
+        }
+        #endregion ------------------------------------------------
     }
 }

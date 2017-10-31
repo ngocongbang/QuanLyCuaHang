@@ -22,12 +22,10 @@ namespace ManagementStore.Business.Item_Colors
                 {
                     var rpItem_Color = unitOfWorkStore.GetRepository<Item_Color>();
                     Item_Color Item_ColorEntity = new Item_Color();
-                    Item_ColorEntity.Item_Color_ID = Item_ColorModel.Item_Color_ID;
                     Item_ColorEntity.Name = Item_ColorModel.Name;                   
                     rpItem_Color.Add(Item_ColorEntity);
                     if (unitOfWorkStore.Save() >= 1)
                     {
-                        Item_ColorModel.Item_Color_ID = Item_ColorEntity.Item_Color_ID;
                         return new Response<Item_ColorModel>((int)StatusResponses.Success, MessageResConst.Success, Item_ColorModel);
                     }
                     else
