@@ -111,8 +111,17 @@ namespace ManagementStore.Business.Item_Materials
                     // search                   
                     int countData = listItem_MaterialModel.Count;
                     listItem_MaterialModel = listItem_MaterialModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
-                    // order                   
-                    listItem_MaterialModel = listItem_MaterialModel.OrderBy(x => x.Name).ToList();
+                    // order
+                    if (sortDecOrInc == MessageResConst.Increase)
+                    {
+                        listItem_MaterialModel = listItem_MaterialModel.OrderBy(x => x.Name).ToList();
+
+                    }
+                    else
+                    {
+                        listItem_MaterialModel = listItem_MaterialModel.OrderByDescending(x => x.Name).ToList();
+
+                    }
                     return new Response<List<Item_MaterialModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listItem_MaterialModel);
                 }
             }

@@ -112,7 +112,17 @@ namespace ManagementStore.Business.Item_Sizes
                     int countData = listItem_SizeModel.Count;
                     listItem_SizeModel = listItem_SizeModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
                     // order                   
-                    listItem_SizeModel = listItem_SizeModel.OrderBy(x => x.Name).ToList();
+                    
+                    if (sortDecOrInc == MessageResConst.Increase)
+                    {
+                        listItem_SizeModel = listItem_SizeModel.OrderBy(x => x.Name).ToList();
+
+                    }
+                    else
+                    {
+                        listItem_SizeModel = listItem_SizeModel.OrderByDescending(x => x.Name).ToList();
+
+                    }
                     return new Response<List<Item_SizeModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listItem_SizeModel);
                 }
             }
