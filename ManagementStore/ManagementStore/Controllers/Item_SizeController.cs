@@ -10,6 +10,7 @@ namespace ManagementStore.Controllers
     {
         Item_SizeHandler _item_SizeHandler = new Item_SizeHandler();
         // GET: Item_Size
+        #region ------------- Hàm lấy dữ liệu ---------------------------
         public ActionResult Index()
         {
             int? pageSize = null;
@@ -64,5 +65,61 @@ namespace ManagementStore.Controllers
 
 
         }
+        #endregion
+
+        #region ------------- Hàm thêm mới size --------------------
+        [AllowAnonymous]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Item_SizeModel item_size)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _item_SizeHandler.InsertItem_Size(item_size);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "Item_Size");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm mới size không thành công");
+                }
+            }
+            return View("Index");
+        }
+        #endregion -------------------------------------------------
+
+
+        #region -------- Hàm cập nhật size hàng hóa -----------
+        public ActionResult Update(int id)
+        {
+            var detail = _item_SizeHandler.GetItem_SizeByID(id);
+            return View(detail.Data);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(Item_SizeModel sizeModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _item_SizeHandler.UpdateItem_Size(sizeModel);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "Item_Size");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật size không thành công");
+                }
+            }
+            return View("Index");
+        }
+        #endregion --------------------------------------------
     }
 }
