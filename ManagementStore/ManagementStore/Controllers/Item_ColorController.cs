@@ -29,10 +29,10 @@ namespace ManagementStore.Controllers
                 pageCurrent = 1;
             }
             ViewBag.PageSize = ListPageSize.GetListPageSize();
-            var listItem_Colors = _item_ColorHandler.GetItem_Colors((int)pageSize, (int)pageCurrent, "Name", "increase", null);
+            var listItem_Color = _item_ColorHandler.GetItem_Colors((int)pageSize, (int)pageCurrent, "Name", "increase", null);
             Item_ColorViewModel viewModel = new Item_ColorViewModel();
-            viewModel.ListItem_ColorModel = listItem_Colors.Data;
-            int size = listItem_Colors.CountData / (int)pageSize + 1;
+            viewModel.ListItem_ColorModel = listItem_Color.Data;
+            int size = (double)listItem_Color.CountData / (int)pageSize == 1 ? 1 : listItem_Color.CountData / (int)pageSize + 1;
             viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
             viewModel.CountPage = size;
             ViewBag.Order = "increase";
@@ -55,7 +55,7 @@ namespace ManagementStore.Controllers
             var listItem_Color = _item_ColorHandler.GetItem_Colors((int)pageSize, (int)pageCurrent, column, orderASCorDSC, item_colorModel);
             Item_ColorViewModel viewModel = new Item_ColorViewModel();
             viewModel.ListItem_ColorModel = listItem_Color.Data;
-            int size = listItem_Color.CountData / (int)pageSize + 1;
+            int size = (double)listItem_Color.CountData / (int)pageSize ==1 ? 1: listItem_Color.CountData / (int)pageSize + 1;
             viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
             viewModel.CountPage = size;
             if (orderASCorDSC == MessageResConst.Increase)

@@ -106,7 +106,14 @@ namespace ManagementStore.Business.Item_Colors
                                                  Name = Item_Color.Name 
                                              }).ToList();
 
-                    // search                   
+                    // search
+                    if (item_Color != null)
+                    {
+                        if (item_Color.Name != null)
+                        {
+                            listItem_ColorModel = listItem_ColorModel.Where(x => x.Name.Contains(item_Color.Name)).ToList();
+                        }                       
+                    }
                     int countData = listItem_ColorModel.Count;
                     listItem_ColorModel = listItem_ColorModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
                     // order

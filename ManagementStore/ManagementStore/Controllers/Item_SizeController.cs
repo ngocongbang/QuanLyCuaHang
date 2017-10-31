@@ -1,4 +1,5 @@
 ﻿using ManagementStore.Business.Common.Constants;
+using ManagementStore.Business.Common.Enums;
 using ManagementStore.Business.Item_Sizes;
 using ManagementStore.Models;
 using ManagementStore.Utilities;
@@ -27,7 +28,7 @@ namespace ManagementStore.Controllers
             var listItem_Sizes = _item_SizeHandler.GetItem_Sizes((int)pageSize, (int)pageCurrent, "Name", "increase", null);
             Item_SizeViewModel viewModel = new Item_SizeViewModel();
             viewModel.ListItem_SizeModel = listItem_Sizes.Data;
-            int size = listItem_Sizes.CountData / (int)pageSize + 1;
+            int size = (double)listItem_Sizes.CountData / (int)pageSize == 1 ? 1 : listItem_Sizes.CountData / (int)pageSize + 1;
             viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
             viewModel.CountPage = size;
             ViewBag.Order = "increase";
@@ -50,7 +51,7 @@ namespace ManagementStore.Controllers
             var listItem_Size = _item_SizeHandler.GetItem_Sizes((int)pageSize, (int)pageCurrent, column, orderASCorDSC, item_SizeModel);
             Item_SizeViewModel viewModel = new Item_SizeViewModel();
             viewModel.ListItem_SizeModel = listItem_Size.Data;
-            int size = listItem_Size.CountData / (int)pageSize + 1;
+            int size = (double)listItem_Size.CountData / (int)pageSize == 1 ? 1 : listItem_Size.CountData / (int)pageSize + 1;
             viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
             viewModel.CountPage = size;
             if (orderASCorDSC == MessageResConst.Increase)
@@ -121,5 +122,20 @@ namespace ManagementStore.Controllers
             return View("Index");
         }
         #endregion --------------------------------------------
+
+        [HttpPost]
+        public JsonResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new { RESULT = "500" });
+            }
+            var result = _item_SizeHandler.Delete((int)id);
+            if (result.ResponseCode == (int)StatusResponses.Success)
+            {
+                return Json(new { RESULT = "200" });
+            }
+            return Json(new { RESULT = "500" });
+        }
     }
 }

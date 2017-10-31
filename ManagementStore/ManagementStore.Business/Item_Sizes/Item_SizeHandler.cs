@@ -108,7 +108,14 @@ namespace ManagementStore.Business.Item_Sizes
                                                  Name = Item_Size1.Name 
                                              }).ToList();
 
-                    // search                   
+                    // search 
+                    if (Item_Size != null)
+                    {
+                        if (Item_Size.Name != null)
+                        {
+                            listItem_SizeModel = listItem_SizeModel.Where(x => x.Name.Contains(Item_Size.Name)).ToList();
+                        }
+                    }
                     int countData = listItem_SizeModel.Count;
                     listItem_SizeModel = listItem_SizeModel.Skip((pageCurrent - 1) * pageSize).Take(pageSize).ToList();
                     // order                   
