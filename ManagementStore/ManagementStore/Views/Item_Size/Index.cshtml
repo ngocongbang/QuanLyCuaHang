@@ -150,10 +150,10 @@
 
             function DeleteConfirm(id, name) {
                 if (id == null) {
-                    alert("Không tồn tại mã khách hàng");
+                    alert("Không tồn tại mã size");
                     return;
                 }
-                if (confirm("Bạn có muốn xóa màu" + name))
+                if (confirm("Bạn có muốn xóa kích thước" + name))
                     $.ajax({
                         type: 'POST',
                         url: '/Item_Color/Delete?id=' + id,
