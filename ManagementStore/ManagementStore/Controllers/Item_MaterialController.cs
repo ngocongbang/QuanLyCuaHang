@@ -1,4 +1,5 @@
 ﻿using ManagementStore.Business.Common.Constants;
+using ManagementStore.Business.Common.Enums;
 using ManagementStore.Business.Item_Materials;
 using ManagementStore.Business.Item_Sizes;
 using ManagementStore.Models;
@@ -11,6 +12,7 @@ namespace ManagementStore.Controllers
     {
         Item_MaterialHandler _item_MaterialHandler = new Item_MaterialHandler();
         // GET: Item_Size
+        #region ------------- GetAll dữ liệu ------------------
         public ActionResult Index()
         {
             int? pageSize = null;
@@ -65,5 +67,78 @@ namespace ManagementStore.Controllers
 
 
         }
+        #endregion --------------------------------------------
+
+        #region --------------- Thêm mới ----------------------------
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Item_MaterialModel materialModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _item_MaterialHandler.InsertItem_Material(materialModel);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "Item_Material");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm mới không thành công");
+                }
+            }
+            return View("Index");
+        }
+        #endregion --------------------------------------------------
+
+        #region ---- Tạo hàm update dữ liệu ---------------
+        public ActionResult Update(int id)
+        {
+            var detail = _item_MaterialHandler.GetItem_MaterialByID(id);
+            return View(detail.Data);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(Item_MaterialModel materialModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _item_MaterialHandler.UpdateItem_Material(materialModel);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "Item_Meterial");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật không thành công");
+                }
+            }
+            return View("Index");
+        }
+        #endregion ----------------------------------------
+
+        #region --- Tạo hàm xóa dữ liệu ---------------------
+        [HttpPost]
+        public JsonResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return Json(new { RESULT = "500" });
+            }
+            var result = _item_MaterialHandler.Delete((int)id);
+            if (result.ResponseCode == (int)StatusResponses.Success)
+            {
+                return Json(new { RESULT = "200" });
+            }
+            return Json(new { RESULT = "500" });
+        }
+        #endregion
     }
+
 }

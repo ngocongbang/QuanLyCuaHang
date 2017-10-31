@@ -22,12 +22,12 @@ namespace ManagementStore.Business.Item_Materials
                 {
                     var rpItem_Material = unitOfWorkStore.GetRepository<Item_Material>();
                     Item_Material Item_MaterialEntity = new Item_Material();
-                    Item_MaterialEntity.Item_Material_ID = Item_MaterialModel.Item_Material_ID;
+                    //Item_MaterialEntity.Item_Material_ID = Item_MaterialModel.Item_Material_ID;
                     Item_MaterialEntity.Name = Item_MaterialModel.Name;                   
                     rpItem_Material.Add(Item_MaterialEntity);
                     if (unitOfWorkStore.Save() >= 1)
                     {
-                        Item_MaterialModel.Item_Material_ID = Item_MaterialEntity.Item_Material_ID;
+                        //Item_MaterialModel.Item_Material_ID = Item_MaterialEntity.Item_Material_ID;
                         return new Response<Item_MaterialModel>((int)StatusResponses.Success, MessageResConst.Success, Item_MaterialModel);
                     }
                     else
