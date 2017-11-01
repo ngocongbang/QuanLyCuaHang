@@ -28,7 +28,7 @@ namespace ManagementStore.Controllers
             var listItem_Sizes = _item_SizeHandler.GetItem_Sizes((int)pageSize, (int)pageCurrent, "Name", "increase", null);
             Item_SizeViewModel viewModel = new Item_SizeViewModel();
             viewModel.ListItem_SizeModel = listItem_Sizes.Data;
-            int size = (double)listItem_Sizes.CountData / (int)pageSize == 1 ? 1 : listItem_Sizes.CountData / (int)pageSize + 1;
+            int size = (double)listItem_Sizes.CountData % (int)pageSize == 0 ? listItem_Sizes.CountData / (int)pageSize : listItem_Sizes.CountData / (int)pageSize + 1;
             viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
             viewModel.CountPage = size;
             ViewBag.Order = "increase";
@@ -51,7 +51,7 @@ namespace ManagementStore.Controllers
             var listItem_Size = _item_SizeHandler.GetItem_Sizes((int)pageSize, (int)pageCurrent, column, orderASCorDSC, item_SizeModel);
             Item_SizeViewModel viewModel = new Item_SizeViewModel();
             viewModel.ListItem_SizeModel = listItem_Size.Data;
-            int size = (double)listItem_Size.CountData / (int)pageSize == 1 ? 1 : listItem_Size.CountData / (int)pageSize + 1;
+            int size = (double)listItem_Size.CountData % (int)pageSize == 0 ? listItem_Size.CountData / (int)pageSize : listItem_Size.CountData / (int)pageSize + 1;
             viewModel.DisplayPage = pageCurrent.ToString() + "/" + size.ToString();
             viewModel.CountPage = size;
             if (orderASCorDSC == MessageResConst.Increase)
