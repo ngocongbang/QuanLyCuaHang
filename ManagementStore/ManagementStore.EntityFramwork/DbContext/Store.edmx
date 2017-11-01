@@ -229,8 +229,6 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
           <Property Name="Image_ID" Type="int" />
           <Property Name="Item_ID" Type="int" />
         </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'BangAn_2017.dbo.Item_Material' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Item_Material">
           <Key>
             <PropertyRef Name="Item_Material_ID" />
@@ -395,17 +393,12 @@ warning 6002: The table/view 'BangAn_2017.dbo.Item_Material' does not have a pri
           <EntitySet Name="Invoice_Item_MS" EntityType="Self.Invoice_Item_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item_Color" EntityType="Self.Item_Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Material" EntityType="Self.Item_Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Item_Size" EntityType="Self.Item_Size" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tranfer_Item_DT" EntityType="Self.Tranfer_Item_DT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tranfer_Item_MS" EntityType="Self.Tranfer_Item_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Item_Material" EntityType="Self.Item_Material" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Item_Material].[Item_Material_ID] AS [Item_Material_ID], 
-    [Item_Material].[Name] AS [Name]
-    FROM [dbo].[Item_Material] AS [Item_Material]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
