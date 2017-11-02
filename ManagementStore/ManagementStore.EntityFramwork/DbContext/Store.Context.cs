@@ -49,5 +49,6 @@ namespace ManagementStore.EntityFramwork.DbContext
         public virtual DbSet<Tranfer_Item_MS> Tranfer_Item_MS { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Item_Material> Item_Material { get; set; }
+        public virtual DbSet<Item_Image> Item_Image { get; set; }
     }
 }
