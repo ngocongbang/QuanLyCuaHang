@@ -22,7 +22,7 @@ namespace ManagementStore.Business.Items
                 {
                     var rpItem = unitOfWorkStore.GetRepository<Item>();
                     Item ItemEntity = new Item();
-                    ItemEntity.Item_ID = ItemModel.Item_ID;
+                    //ItemEntity.Item_ID = ItemModel.Item_ID;
                     ItemEntity.Item_Code = ItemModel.Item_Code;
                     ItemEntity.Name = ItemModel.Name;
                     ItemEntity.GroupItem_ID = ItemModel.GroupItem_ID;
@@ -63,7 +63,7 @@ namespace ManagementStore.Business.Items
 
                     var rpItem = unitOfWorkStore.GetRepository<Item>();
                     Item ItemEntity = rpItem.GetById(ItemModel.Item_ID);
-                    ItemEntity.Item_ID = ItemModel.Item_ID;
+                    //ItemEntity.Item_ID = ItemModel.Item_ID;
                     ItemEntity.Item_Code = ItemModel.Item_Code;
                     ItemEntity.Name = ItemModel.Name;
                     ItemEntity.GroupItem_ID = ItemModel.GroupItem_ID;

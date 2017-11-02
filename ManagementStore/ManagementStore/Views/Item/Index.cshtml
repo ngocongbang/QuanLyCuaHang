@@ -29,7 +29,7 @@
 </div>
 <div style="clear:both;"></div>
 <div style="margin-top:10px;">
-    @using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formCustomer" }))
+    @using (Html.BeginForm("Index", "Customer", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "formItem" }))
     {<div class="form-group">
         <div class="col-md-2 control-label">
             Mã hàng hóa
@@ -143,7 +143,7 @@
                             </a>
                         </span>
                         <span>
-                            <a href="#" onclick="DeleteConfirm(@item.Item_ID">
+                            <a href="#" onclick="DeleteItem(@item.Item_ID,'@item.Name')">
                                 <img src="/assets/images/action/Delete_Icon.png" style="width:23px;" />
                             </a>
                         </span>
@@ -152,5 +152,100 @@
             }
 
         </table>
+        <div class="form-group">
+            <div id="pro_pag2" class="col-md-5">
+                Số bản ghi
+                @Html.DropDownList("pageSize", new SelectList(ViewBag.PageSize, "NumberID", "NumberValue"), new { id = "pagesizelist", onchange = "changeListPage()" })
+                @*@Html.DropDownList("pageSize", new SelectList(new Dictionary<string, int> { { "5", 5 }, { "10", 10 }, { "20", 20 }, { "100", 100 } }, "Key", "Value"), new { id = "pagesizelist", onchange = "changeListPage()" })*@
+            </div>
+            <div class="col-md-5">
+                Số trang hiện tại
+                @Html.DisplayFor(Model => Model.DisplayPage)
+            </div>
+            <button id="back" type="submit" class="col-md-1 btn-next" style="margin-right:15px;width:50px;" onclick="Back()">
+                <img src="/assets/images/action/prev.png" style="width:18px;" />
+            </button>
+            <button id="next" type="submit" class="col-md-1 btn-prev" style="width:50px;" onclick="Next()">
+                <img src="/assets/images/action/next.png" style="width:18px;" />
+            </button>
+        </div>
+        <div style="display:none">
+            @Html.TextBox("pageCurrent", "1")
+            <label id="totalPage">@Html.DisplayFor(Model => Model.CountPage)</label>
+            @Html.TextBox("column", "customername")
+            @Html.TextBox("orderASCorDSC", (string)ViewBag.Order)
+
+        </div>
+        <script type="text/javascript">
+            function orderHeader(order) {
+                $('#column').val(order);
+               var order = $('#orderASCorDSC').val();
+               if (order == 'increase')
+               {
+                   $('#orderASCorDSC').val('decrease');
+               }
+               else
+               {
+                   $('#orderASCorDSC').val('increase');
+               }
+               $('#formItem').submit();
+            }
+
+            function changeListPage() {
+                $('#pageCurrent').val(1);
+                $('#formItem').submit();
+            }
+            // next
+            function Next() {
+                var b = parseInt($('#pageCurrent').val().toString()) + 1;
+                var itotalpage = parseInt($('#totalPage').text());
+                $('#pageCurrent').val(b);
+                if (itotalpage <= b) {
+                    $('#pageCurrent').val(itotalpage);
+                }
+            }
+            function Back() {
+                var b = parseInt($('#pageCurrent').val().toString()) - 1;
+                if (b == 0) {
+                    b = 1;
+                }
+                $('#pageCurrent').val(b);
+            }
+            function ResetValue() {
+                $('#SearchItem_MaterialName').val(null);
+            }
+
+            function DeleteItem(id, name) {
+                if (id == null) {
+                    alert("Không tồn tại mã");
+                    return;
+                }
+                if (confirm("Bạn có muốn xóa" + name))
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Item/Delete?id=' + id,
+                        data: JSON.stringify(),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.RESULT == "200") {
+                                $('#formItem').submit();
+                            }
+                            else {
+                                alert("Lỗi truy vấn sql");
+                            }
+
+                        },
+                        error: function () {
+                            alert("Không kết nối được csdl");
+                        }
+                    }).fail(function (response) {
+                        alert(response);
+                    });
+
+                else
+                    return false;
+            }
+        </script>
     }
 </div>
