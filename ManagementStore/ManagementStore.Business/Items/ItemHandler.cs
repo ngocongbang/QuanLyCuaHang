@@ -5,7 +5,8 @@ using ManagementStore.Business.Common.Enums;
 using ManagementStore.Business.Common.Constants;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementStore.EntityFramwork.DbContext; 
+using ManagementStore.EntityFramwork.DbContext;
+using ManagementStore.Business.Item_Colors;
 
 namespace ManagementStore.Business.Items
 {
@@ -230,6 +231,35 @@ namespace ManagementStore.Business.Items
             catch (Exception ex)
             {
                 return new Response<ItemModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
+            }
+        }
+        // hàm lấy màu hàng hóa
+        public Response<List<Item_ColorModel>> GetItem_Colors()
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpItem_Color = unitOfWorkStore.GetRepository<Item_Color>();
+                    var listItem_ColorEntity = rpItem_Color.GetAll();
+                    var listItem_ColorModel = (from Item_Color in listItem_ColorEntity
+                                               select new Item_ColorModel()
+                                               {
+                                                   Item_Color_ID = Item_Color.Item_Color_ID,
+                                                   Name = Item_Color.Name
+                                               }).ToList();
+
+                    // search                   
+
+                    listItem_ColorModel = listItem_ColorModel.OrderByDescending(x => x.Name).ToList();
+
+
+                    return new Response<List<Item_ColorModel>>((int)StatusResponses.Success, listItem_ColorModel.Count, MessageResConst.Success, listItem_ColorModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<Item_ColorModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
             }
         }
     }

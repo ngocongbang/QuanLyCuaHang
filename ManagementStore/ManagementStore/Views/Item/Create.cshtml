@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Item_Color_ID:</div>
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.Item_Color_ID, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Item_Color_ID,new SelectList(ViewBag.MaChuDe, "Item_Color_ID","Name"),new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Item_Color_ID, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -62,6 +62,7 @@ namespace ManagementStore.Controllers
         #region ------------- Tạo mới hàng hóa ------------------------
         public ActionResult Create()
         {
+            ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
             return View();
         }
         [HttpPost]
@@ -69,6 +70,7 @@ namespace ManagementStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ItemModel itemModel)
         {
+            ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
             if (ModelState.IsValid)
             {
                 var result = _itemHander.InsertItem(itemModel);
