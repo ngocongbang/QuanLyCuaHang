@@ -140,6 +140,8 @@
           <Property Name="Image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Url" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Item_ID" Type="int" />
+          <Property Name="IsMain" Type="bit" />
         </EntityType>
         <EntityType Name="Input_Item_DT">
           <Key>
@@ -224,11 +226,15 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Item_Image">
-          <Property Name="Image_ID" Type="int" />
-          <Property Name="Item_ID" Type="int" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="Image_ID" />
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Image_ID" Type="int" Nullable="false" />
+          <Property Name="Item_ID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Item_Material">
           <Key>
             <PropertyRef Name="Item_Material_ID" />
@@ -373,6 +379,18 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Image_Item1">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BangAn_2017ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -399,6 +417,12 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
           <EntitySet Name="Tranfer_Item_DT" EntityType="Self.Tranfer_Item_DT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tranfer_Item_MS" EntityType="Self.Tranfer_Item_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Image" EntityType="Self.Item_Image" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Item_Image].[Image_ID] AS [Image_ID], 
+    [Item_Image].[Item_ID] AS [Item_ID]
+    FROM [dbo].[Item_Image] AS [Item_Image]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -422,6 +446,10 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
           <AssociationSet Name="FK_GroupItemSub_GroupItemSub" Association="Self.FK_GroupItemSub_GroupItemSub">
             <End Role="GroupItem" EntitySet="GroupItem" />
             <End Role="GroupItem_Sub" EntitySet="GroupItem_Sub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_Item1" Association="Self.FK_Image_Item1">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Image" EntitySet="Image" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -565,6 +593,9 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
           <Property Name="Image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Item_ID" Type="Int32" />
+          <Property Name="IsMain" Type="Boolean" />
+          <NavigationProperty Name="Item" Relationship="BangAn_2017Model.FK_Image_Item1" FromRole="Image" ToRole="Item" />
         </EntityType>
         <EntityType Name="Input_Item_DT">
           <Key>
@@ -640,6 +671,7 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
           <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="AmountShip" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Images" Relationship="BangAn_2017Model.FK_Image_Item1" FromRole="Item" ToRole="Image" />
         </EntityType>
         <EntityType Name="Item_Color">
           <Key>
@@ -813,7 +845,32 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Item_Image" EntityType="BangAn_2017Model.Item_Image" />
+          <AssociationSet Name="FK_Image_Item1" Association="BangAn_2017Model.FK_Image_Item1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Image" EntitySet="Images" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Item_Image">
+          <Key>
+            <PropertyRef Name="Image_ID" />
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Image_ID" Type="Int32" Nullable="false" />
+          <Property Name="Item_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Image_Item1">
+          <End Type="BangAn_2017Model.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="BangAn_2017Model.Image" Role="Image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Image">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -951,6 +1008,8 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
           <EntitySetMapping Name="Images">
             <EntityTypeMapping TypeName="BangAn_2017Model.Image">
               <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
                 <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
                 <ScalarProperty Name="Url" ColumnName="Url" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1123,6 +1182,14 @@ warning 6013: The table/view 'BangAn_2017.dbo.Item_Image' does not have a primar
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Item_Image">
+            <EntityTypeMapping TypeName="BangAn_2017Model.Item_Image">
+              <MappingFragment StoreEntitySet="Item_Image">
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
