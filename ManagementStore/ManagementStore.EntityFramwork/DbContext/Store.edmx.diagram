@@ -34,6 +34,8 @@
         <AssociationConnector Association="BangAn_2017Model.FK_Employee_Branch" ManuallyRouted="false" />
         <AssociationConnector Association="BangAn_2017Model.FK_GroupItemSub_GroupItemSub" ManuallyRouted="false" />
         <AssociationConnector Association="BangAn_2017Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BangAn_2017Model.Item_Image" Width="1.5" PointX="11.375" PointY="13.75" />
+        <AssociationConnector Association="BangAn_2017Model.FK_Image_Item1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
