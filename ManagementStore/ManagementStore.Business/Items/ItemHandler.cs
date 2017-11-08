@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ManagementStore.EntityFramwork.DbContext;
 using ManagementStore.Business.Item_Colors;
+using ManagementStore.Business.Item_Sizes;
+using ManagementStore.Business.Item_Materials;
 
 namespace ManagementStore.Business.Items
 {
@@ -233,6 +235,7 @@ namespace ManagementStore.Business.Items
                 return new Response<ItemModel>((int)StatusResponses.ErrorSystem, ex.Message, null);
             }
         }
+
         // hàm lấy màu hàng hóa
         public Response<List<Item_ColorModel>> GetItem_Colors()
         {
@@ -262,5 +265,65 @@ namespace ManagementStore.Business.Items
                 return new Response<List<Item_ColorModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
             }
         }
+
+        // Hàm lấy kích thước hàng hóa
+        public Response<List<Item_SizeModel>> GetItem_Size()
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpItem_Color = unitOfWorkStore.GetRepository<Item_Size>();
+                    var listItem_ColorEntity = rpItem_Color.GetAll();
+                    var listItem_ColorModel = (from Item_Size in listItem_ColorEntity
+                                               select new Item_SizeModel()
+                                               {
+                                                   Item_Size1 = Item_Size.Item_Size1,
+                                                   Name = Item_Size.Name
+                                               }).ToList();
+
+                    // search                   
+
+                    listItem_ColorModel = listItem_ColorModel.OrderByDescending(x => x.Name).ToList();
+
+
+                    return new Response<List<Item_SizeModel>>((int)StatusResponses.Success, listItem_ColorModel.Count, MessageResConst.Success, listItem_ColorModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<Item_SizeModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
+            }
+        }
+        // Hàm lấy chất liệu hàng hóa
+        public Response<List<Item_MaterialModel>> GetItem_Material()
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpItem_Color = unitOfWorkStore.GetRepository<Item_Material>();
+                    var listItem_ColorEntity = rpItem_Color.GetAll();
+                    var listItem_ColorModel = (from Item_Material in listItem_ColorEntity
+                                               select new Item_MaterialModel()
+                                               {
+                                                   Item_Material_ID = Item_Material.Item_Material_ID,
+                                                   Name = Item_Material.Name
+                                               }).ToList();
+
+                    // search                   
+
+                    listItem_ColorModel = listItem_ColorModel.OrderByDescending(x => x.Name).ToList();
+
+
+                    return new Response<List<Item_MaterialModel>>((int)StatusResponses.Success, listItem_ColorModel.Count, MessageResConst.Success, listItem_ColorModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<Item_MaterialModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
+            }
+        }
+
     }
 }
