@@ -63,6 +63,8 @@ namespace ManagementStore.Controllers
         public ActionResult Create()
         {
             ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
+            ViewBag.Item_Size = _itemHander.GetItem_Size().Data;
+            ViewBag.Item_Material = _itemHander.GetItem_Material().Data;
             return View();
         }
         [HttpPost]
@@ -71,6 +73,9 @@ namespace ManagementStore.Controllers
         public ActionResult Create(ItemModel itemModel)
         {
             ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
+            ViewBag.Item_Size = _itemHander.GetItem_Size().Data;
+            ViewBag.Item_Material = _itemHander.GetItem_Material().Data;
+
             if (ModelState.IsValid)
             {
                 var result = _itemHander.InsertItem(itemModel);
