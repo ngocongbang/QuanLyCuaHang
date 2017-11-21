@@ -11,5 +11,8 @@ namespace ManagementStore.Business.GroupItems
         public int GroupItem_ID { get; set; }
         public string GroupItem_Code { get; set; }
         public string Name { get; set; }
+        public string TitleKey { get; set; }
+        public string ParentId { get; set; }
+        public string ParenName { get; set; }
     }
 }

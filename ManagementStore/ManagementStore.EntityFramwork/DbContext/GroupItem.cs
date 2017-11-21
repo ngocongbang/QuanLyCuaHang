@@ -23,6 +23,9 @@ namespace ManagementStore.EntityFramwork.DbContext
         public int GroupItem_ID { get; set; }
         public string GroupItem_Code { get; set; }
         public string Name { get; set; }
+        public string TitleKey { get; set; }
+        public string ParentId { get; set; }
+        public string ParenName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupItem_Sub> GroupItem_Sub { get; set; }

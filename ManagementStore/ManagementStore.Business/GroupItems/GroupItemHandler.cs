@@ -1,6 +1,7 @@
 ﻿using log4net;
 using ManagementStore.Business.Common.Constants;
 using ManagementStore.Business.Common.Enums;
+using ManagementStore.Business.Common.Utils;
 using ManagementStore.EntityFramwork.DbContext;
 using ManagementStore.EntityFramwork.Responsitory;
 using System;
@@ -26,7 +27,32 @@ namespace ManagementStore.Business.GroupItems
                     GroupItem GroupItemEntity = new GroupItem();
                     GroupItemEntity.GroupItem_ID = GroupItemModel.GroupItem_ID;
                     GroupItemEntity.GroupItem_Code = GroupItemModel.GroupItem_Code;
-                    GroupItemEntity.Name = GroupItemModel.Name;                   
+                    GroupItemEntity.Name = GroupItemModel.Name;
+                    GroupItemEntity.TitleKey = FormatData.RemoveUnicode(GroupItemModel.Name);
+
+                    if (!string.IsNullOrEmpty(GroupItemModel.ParentId) && GroupItemModel.ParentId != "undefined")
+                    {
+                        string prid = GroupItemModel.ParentId;
+                        var listGroupItemEntity = rpGroupItem.GetAll();
+                        var listGroupItemModel = (from obGroupItem in listGroupItemEntity
+                                                  select new GroupItemModel()
+                                                  {
+                                                      GroupItem_ID = obGroupItem.GroupItem_ID,
+                                                      GroupItem_Code = obGroupItem.GroupItem_Code,
+                                                      Name = obGroupItem.Name,
+                                                      TitleKey = obGroupItem.TitleKey,
+                                                      ParentId = obGroupItem.ParentId,
+                                                      ParenName = obGroupItem.ParenName
+                                                  }).ToList();
+                        GroupItemModel tg = listGroupItemModel.Where(x => x.TitleKey == prid).FirstOrDefault();
+                           // _category_DocumentService.FindBy<Category_DocumentFormDTO>(sp => sp.TitleKey == prid && sp.isApprove != false).FirstOrDefault();
+
+                        if (tg != null)
+                        {
+                            GroupItemEntity.ParenName = tg.Name;
+                        }
+                    }
+
                     rpGroupItem.Add(GroupItemEntity);
                     if (unitOfWorkStore.Save() >= 1)
                     {
@@ -113,7 +139,10 @@ namespace ManagementStore.Business.GroupItems
                                                   {
                                                       GroupItem_ID = obGroupItem.GroupItem_ID,
                                                       GroupItem_Code = obGroupItem.GroupItem_Code,
-                                                      Name = obGroupItem.Name
+                                                      Name = obGroupItem.Name,
+                                                      TitleKey = obGroupItem.TitleKey,
+                                                      ParentId = obGroupItem.ParentId,
+                                                      ParenName = obGroupItem.ParenName
                                                   }).ToList();
 
                     // search
@@ -142,6 +171,38 @@ namespace ManagementStore.Business.GroupItems
                             break;
                     }
                     return new Response<List<GroupItemModel>>((int)StatusResponses.Success, countData, MessageResConst.Success, listGroupItemModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<GroupItemModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
+            }
+        }
+        //Lấy danh sách list nhóm hang hóa cha
+        public Response<List<GroupItemModel>> GetGroupItemsForParent()
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpGroupItem = unitOfWorkStore.GetRepository<GroupItem>();
+                    var listGroupItemEntity = rpGroupItem.GetAll();
+                    var listGroupItemModel = (from obGroupItem in listGroupItemEntity
+                                              select new GroupItemModel()
+                                              {
+                                                  GroupItem_ID = obGroupItem.GroupItem_ID,
+                                                  GroupItem_Code = obGroupItem.GroupItem_Code,
+                                                  Name = obGroupItem.Name,
+                                                  TitleKey = obGroupItem.TitleKey,
+                                                  ParentId = obGroupItem.ParentId,
+                                                  ParenName = obGroupItem.ParenName
+                                              }).ToList();
+
+                  
+                    listGroupItemModel = listGroupItemModel.Where(x=>x.ParentId == null).ToList();
+                    // order
+                 
+                    return new Response<List<GroupItemModel>>((int)StatusResponses.Success, 0, MessageResConst.Success, listGroupItemModel);
                 }
             }
             catch (Exception ex)

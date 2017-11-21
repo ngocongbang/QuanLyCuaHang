@@ -47,16 +47,16 @@
 
 
             <div class="form-group">
-                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">GroupItem_ID:</div>
+                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Nhóm hàng hóa:</div>
                 <div class="col-md-3">
-                    @Html.TextBoxFor(model => model.GroupItem_ID, new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.GroupItem_ID, new SelectList(ViewBag.Item_Group, "GroupItem_ID", "Name"), "-- Select --", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.GroupItem_ID, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">GroupItem_Sub_ID:</div>
+                @*<div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">GroupItem_Sub_ID:</div>
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.GroupItem_Sub_ID, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.GroupItem_Sub_ID, "", new { @class = "text-danger" })
-                </div>
+                </div>*@
             </div>
 
             <div class="form-group">

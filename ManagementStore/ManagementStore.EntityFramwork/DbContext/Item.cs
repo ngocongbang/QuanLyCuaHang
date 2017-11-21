@@ -14,12 +14,6 @@ namespace ManagementStore.EntityFramwork.DbContext
     
     public partial class Item
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Item()
-        {
-            this.Images = new HashSet<Image>();
-        }
-    
         public int Item_ID { get; set; }
         public string Item_Code { get; set; }
         public string Name { get; set; }
@@ -34,8 +28,5 @@ namespace ManagementStore.EntityFramwork.DbContext
         public string Unit { get; set; }
         public string Note { get; set; }
         public Nullable<decimal> AmountShip { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Image> Images { get; set; }
     }
 }

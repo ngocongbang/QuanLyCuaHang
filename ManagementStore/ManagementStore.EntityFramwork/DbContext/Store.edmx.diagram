@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="BangAn_2017Model.Employee" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="BangAn_2017Model.GroupItem" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="BangAn_2017Model.GroupItem_Sub" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BangAn_2017Model.Image" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BangAn_2017Model.Input_Item_DT" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BangAn_2017Model.Input_Item_MS" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BangAn_2017Model.Invoice_Item_DT" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
@@ -34,8 +33,7 @@
         <AssociationConnector Association="BangAn_2017Model.FK_Employee_Branch" ManuallyRouted="false" />
         <AssociationConnector Association="BangAn_2017Model.FK_GroupItemSub_GroupItemSub" ManuallyRouted="false" />
         <AssociationConnector Association="BangAn_2017Model.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="BangAn_2017Model.Item_Image" Width="1.5" PointX="11.375" PointY="13.75" />
-        <AssociationConnector Association="BangAn_2017Model.FK_Image_Item1" />
+        <EntityTypeShape EntityType="BangAn_2017Model.Image" Width="1.5" PointX="11.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

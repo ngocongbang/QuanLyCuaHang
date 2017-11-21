@@ -65,6 +65,7 @@ namespace ManagementStore.Controllers
             ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
             ViewBag.Item_Size = _itemHander.GetItem_Size().Data;
             ViewBag.Item_Material = _itemHander.GetItem_Material().Data;
+            ViewBag.Item_Group = _itemHander.GetGroupItemsForParentAndChild().Data;
             return View();
         }
         [HttpPost]
@@ -75,7 +76,7 @@ namespace ManagementStore.Controllers
             ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
             ViewBag.Item_Size = _itemHander.GetItem_Size().Data;
             ViewBag.Item_Material = _itemHander.GetItem_Material().Data;
-
+            ViewBag.Item_Group = _itemHander.GetGroupItemsForParentAndChild().Data;
             if (ModelState.IsValid)
             {
                 var result = _itemHander.InsertItem(itemModel);

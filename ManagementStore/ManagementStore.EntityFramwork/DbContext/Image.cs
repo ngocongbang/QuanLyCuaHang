@@ -19,7 +19,5 @@ namespace ManagementStore.EntityFramwork.DbContext
         public string Name { get; set; }
         public Nullable<int> Item_ID { get; set; }
         public Nullable<bool> IsMain { get; set; }
-    
-        public virtual Item Item { get; set; }
     }
 }

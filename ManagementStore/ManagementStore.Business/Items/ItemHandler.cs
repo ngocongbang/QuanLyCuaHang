@@ -9,6 +9,7 @@ using ManagementStore.EntityFramwork.DbContext;
 using ManagementStore.Business.Item_Colors;
 using ManagementStore.Business.Item_Sizes;
 using ManagementStore.Business.Item_Materials;
+using ManagementStore.Business.GroupItems;
 
 namespace ManagementStore.Business.Items
 {
@@ -197,7 +198,7 @@ namespace ManagementStore.Business.Items
                             {
                                 listItemModel = listItemModel.OrderByDescending(x => x.Name).ToList();
                             }
-                            break;                       
+                            break;
 
                         default:
                             break;
@@ -324,6 +325,85 @@ namespace ManagementStore.Business.Items
                 return new Response<List<Item_MaterialModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
             }
         }
+        //Lấy danh sách list nhóm hang hóa cha
+        public Response<List<GroupItemModel>> GetGroupItemsForParentAndChild()
+        {
+            try
+            {
+                using (var unitOfWorkStore = new UnitOfWorkStore(dbFactory))
+                {
+                    var rpGroupItem = unitOfWorkStore.GetRepository<GroupItem>();
+                    var listGroupItemEntity = rpGroupItem.GetAll();
+                    var query = (from obGroupItem in listGroupItemEntity
+                                 select new GroupItemModel()
+                                 {
+                                     GroupItem_ID = obGroupItem.GroupItem_ID,
+                                     GroupItem_Code = obGroupItem.GroupItem_Code,
+                                     Name = obGroupItem.Name,
+                                     TitleKey = obGroupItem.TitleKey,
+                                     ParentId = obGroupItem.ParentId,
+                                     ParenName = obGroupItem.ParenName
+                                 }).ToList();
 
+
+                    query = query.Where(x => x.ParentId == null).ToList();
+                    var con = (from obGroupItem in listGroupItemEntity
+                               select new GroupItemModel()
+                               {
+                                   GroupItem_ID = obGroupItem.GroupItem_ID,
+                                   GroupItem_Code = obGroupItem.GroupItem_Code,
+                                   Name = obGroupItem.Name,
+                                   TitleKey = obGroupItem.TitleKey,
+                                   ParentId = obGroupItem.ParentId,
+                                   ParenName = obGroupItem.ParenName
+                               }).ToList();
+                    con = con.Where(x => x.ParentId != null).ToList();
+                    List<GroupItemModel> rt = new List<GroupItemModel>();
+                    List<GroupItemModel> rtcon = new List<GroupItemModel>();
+                    // order
+                    if (query != null && query.Count > 0)
+                    {
+                        foreach (var item in query)
+                        {
+                            rtcon = con.Where(x => x.ParentId == item.TitleKey).ToList();
+                            GroupItemModel cat = new GroupItemModel();
+                            if (rtcon != null && rtcon.Count > 0)
+                            {
+                                //public int GroupItem_ID { get; set; }
+                                //public string GroupItem_Code { get; set; }
+                                //public string Name { get; set; }
+                                //public string TitleKey { get; set; }
+                                //public string ParentId { get; set; }
+                                //public string ParenName { get; set; }
+                                cat.GroupItem_ID = item.GroupItem_ID;
+                                cat.GroupItem_Code = item.GroupItem_Code;
+                                cat.Name = item.Name;
+                                rt.Add(cat);
+                                foreach (GroupItemModel it in rtcon)
+                                {
+                                    it.Name = "---" + it.Name +"---";
+                                    rt.Add(it);
+                                }
+
+                            }
+                            else
+                            {
+                                cat.GroupItem_ID = item.GroupItem_ID;
+                                cat.GroupItem_Code = item.GroupItem_Code;
+                                cat.Name = item.Name;
+                                cat.TitleKey = item.TitleKey;
+                                rt.Add(cat);
+                            }
+                        }
+                    }
+
+                    return new Response<List<GroupItemModel>>((int)StatusResponses.Success, 0, MessageResConst.Success, rt);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<GroupItemModel>>((int)StatusResponses.ErrorSystem, 0, ex.Message, null);
+            }
+        }
     }
 }

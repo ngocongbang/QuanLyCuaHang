@@ -36,7 +36,6 @@ namespace ManagementStore.EntityFramwork.DbContext
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<GroupItem> GroupItems { get; set; }
         public virtual DbSet<GroupItem_Sub> GroupItem_Sub { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Input_Item_DT> Input_Item_DT { get; set; }
         public virtual DbSet<Input_Item_MS> Input_Item_MS { get; set; }
         public virtual DbSet<Invoice_Item_DT> Invoice_Item_DT { get; set; }
@@ -49,6 +48,6 @@ namespace ManagementStore.EntityFramwork.DbContext
         public virtual DbSet<Tranfer_Item_MS> Tranfer_Item_MS { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Item_Material> Item_Material { get; set; }
-        public virtual DbSet<Item_Image> Item_Image { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
     }
 }
