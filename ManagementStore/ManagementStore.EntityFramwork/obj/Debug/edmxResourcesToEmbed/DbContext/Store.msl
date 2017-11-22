@@ -80,6 +80,10 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="BangAn_2017Model.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Tax_Code" ColumnName="Tax_Code" />
           <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
           <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -109,6 +113,9 @@
     <EntitySetMapping Name="GroupItems">
       <EntityTypeMapping TypeName="BangAn_2017Model.GroupItem">
         <MappingFragment StoreEntitySet="GroupItem">
+          <ScalarProperty Name="ParenName" ColumnName="ParenName" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="TitleKey" ColumnName="TitleKey" />
           <ScalarProperty Name="GroupItem_ID" ColumnName="GroupItem_ID" />
           <ScalarProperty Name="GroupItem_Code" ColumnName="GroupItem_Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -122,15 +129,6 @@
           <ScalarProperty Name="GroupItemSub_Code" ColumnName="GroupItemSub_Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="GroupItem_ID" ColumnName="GroupItem_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Images">
-      <EntityTypeMapping TypeName="BangAn_2017Model.Image">
-        <MappingFragment StoreEntitySet="Image">
-          <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -300,5 +298,16 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="BangAn_2017Model.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -5,6 +5,7 @@ using ManagementStore.Models;
 using ManagementStore.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,7 +39,7 @@ namespace ManagementStore.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Index(int? pageSize,int? pageCurrent,string column,string orderASCorDSC, ItemModel itemModel)
+        public ActionResult Index(int? pageSize, int? pageCurrent, string column, string orderASCorDSC, ItemModel itemModel)
         {
             if (pageSize == null)
             {
@@ -71,7 +72,7 @@ namespace ManagementStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ItemModel itemModel)
+        public ActionResult Create(ItemModel itemModel, IEnumerable<HttpPostedFileBase> file)
         {
             ViewBag.MaChuDe = _itemHander.GetItem_Colors().Data;
             ViewBag.Item_Size = _itemHander.GetItem_Size().Data;
@@ -83,7 +84,8 @@ namespace ManagementStore.Controllers
                 if (result != null)
                 {
                     return RedirectToAction("Index", "Item");
-                }else
+                }
+                else
                 {
                     ModelState.AddModelError("", "Thêm mới không thành công");
                 }
@@ -136,5 +138,50 @@ namespace ManagementStore.Controllers
             return Json(new { RESULT = "500" });
         }
         #endregion -------------------------------------------------
+
+        // Tạo chức năng upload ảnh
+        #region --------- Tạo chức năng upload ảnh ---------------
+        public ActionResult Upload()
+        {
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var path = Path.Combine(Server.MapPath("~/MyImages"));
+                        string pathString = System.IO.Path.Combine(path.ToString());
+                        var fileName1 = Path.GetFileName(file.FileName);
+                        bool isExists = System.IO.Directory.Exists(pathString);
+                        if (!isExists) System.IO.Directory.CreateDirectory(pathString);
+                        var uploadpath = string.Format("{0}\\{1}", pathString, file.FileName);
+                        file.SaveAs(uploadpath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+            if (isSavedSuccessfully)
+            {
+                return Json(new
+                {
+                    Message = fName
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    Message = "Error in saving file"
+                });
+            }
+            #endregion
+        }
     }
 }

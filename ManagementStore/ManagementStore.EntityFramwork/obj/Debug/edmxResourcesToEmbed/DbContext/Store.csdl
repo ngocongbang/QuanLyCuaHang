@@ -92,6 +92,10 @@
     <Property Name="Birthday" Type="DateTime" Precision="3" />
     <Property Name="Category" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Company_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Tax_Code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -115,6 +119,9 @@
     <Property Name="GroupItem_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="GroupItem_Sub" Relationship="Self.FK_GroupItemSub_GroupItemSub" FromRole="GroupItem" ToRole="GroupItem_Sub" />
+    <Property Name="TitleKey" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="ParentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParenName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="GroupItem_Sub">
     <Key>
@@ -125,14 +132,6 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="GroupItem_ID" Type="Int32" />
     <NavigationProperty Name="GroupItem" Relationship="Self.FK_GroupItemSub_GroupItemSub" FromRole="GroupItem_Sub" ToRole="GroupItem" />
-  </EntityType>
-  <EntityType Name="Image">
-    <Key>
-      <PropertyRef Name="Image_ID" />
-    </Key>
-    <Property Name="Image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Input_Item_DT">
     <Key>
@@ -348,7 +347,6 @@
     <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="GroupItems" EntityType="Self.GroupItem" />
     <EntitySet Name="GroupItem_Sub" EntityType="Self.GroupItem_Sub" />
-    <EntitySet Name="Images" EntityType="Self.Image" />
     <EntitySet Name="Input_Item_DT" EntityType="Self.Input_Item_DT" />
     <EntitySet Name="Input_Item_MS" EntityType="Self.Input_Item_MS" />
     <EntitySet Name="Invoice_Item_DT" EntityType="Self.Invoice_Item_DT" />
@@ -381,5 +379,16 @@
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <EntitySet Name="Images" EntityType="BangAn_2017Model.Image" />
   </EntityContainer>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Image_ID" />
+    </Key>
+    <Property Name="Image_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Item_ID" Type="Int32" />
+    <Property Name="IsMain" Type="Boolean" />
+  </EntityType>
 </Schema>

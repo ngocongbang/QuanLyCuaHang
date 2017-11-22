@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ManagementStore.EntityFramwork.DbContext;
 
 namespace ManagementStore.Business.Items
 {
@@ -22,5 +23,7 @@ namespace ManagementStore.Business.Items
         public string Unit { get; set; }
         public string Note { get; set; }
         public Nullable<decimal> AmountShip { get; set; }
+
+        public ICollection<Image> Images { set; get; }
     }
 }
