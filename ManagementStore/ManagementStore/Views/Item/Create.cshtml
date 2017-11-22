@@ -62,12 +62,12 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">AmountSale:</div>
+                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Số tiền giảm giá:</div>
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.AmountSale, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.AmountSale, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">AmountOrigin:</div>
+                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Số tiền mua ban đầu:</div>
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.AmountOrigin, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.AmountOrigin, "", new { @class = "text-danger" })
@@ -76,7 +76,7 @@
 
 
             <div class="form-group">
-                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Blance:</div>
+                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Số dư:</div>
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.Blance, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Blance, "", new { @class = "text-danger" })
@@ -108,7 +108,7 @@
                     @Html.TextBoxFor(model => model.Unit, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">AmountShip:</div>
+                <div class="col-md-2 control-label" style="font-size:14px; font-weight:bold;">Số tiền ship:</div>
                 <div class="col-md-3">
                     @Html.TextBoxFor(model => model.AmountShip, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.AmountShip, "", new { @class = "text-danger" })

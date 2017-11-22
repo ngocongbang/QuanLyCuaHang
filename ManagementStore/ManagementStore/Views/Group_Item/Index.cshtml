@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
+    int i = 1;
 }
 
 <style>
@@ -51,11 +52,11 @@
         <table class="table table-hover table-striped" id="customerTable">
             <tr style="background-color:#02a44f">
                 <th style="width:5%;">STT</th>
-                <th style="width:40%;">
+                <th style="width:40%;" class="handpointer">
                     Nhóm hàng hóa
                 </th>
-              
-                <th style="width:40%;">
+
+                <th style="width:40%;" class="handpointer">
                     Nhóm hàng hóa cha
                 </th>
                 <th style="width:15%;"></th>
@@ -64,7 +65,9 @@
             @foreach (var item in Model.ListGroup_ItemModel)
             {
                 <tr>
-                    <td></td>
+                    <td>
+                        @i
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -77,6 +80,7 @@
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                     </td>
                 </tr>
+                i++;
             }
 
         </table>
@@ -108,15 +112,13 @@
         <script type="text/javascript">
             function orderHeader(order) {
                 $('#column').val(order);
-               var order = $('#orderASCorDSC').val();
-               if (order == 'increase')
-               {
-                   $('#orderASCorDSC').val('decrease');
-               }
-               else
-               {
-                   $('#orderASCorDSC').val('increase');
-               }
+                var order = $('#orderASCorDSC').val();
+                if (order == 'increase') {
+                    $('#orderASCorDSC').val('decrease');
+                }
+                else {
+                    $('#orderASCorDSC').val('increase');
+                }
                 $('#formItem_Color').submit();
             }
 

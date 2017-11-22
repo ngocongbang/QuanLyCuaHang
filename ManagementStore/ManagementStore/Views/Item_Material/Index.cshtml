@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
+    int i = 1;
 }
 <style>
     .handpointer {
@@ -48,7 +49,8 @@
         </div>
         <table class="table table-hover table-striped" id="customerTable">
             <tr style="background-color:#02a44f">
-                <th id="customername" class="handpointer" style="width:92%">
+                <th style="width:5%" class="handpointer">STT</th>
+                <th id="customername" class="handpointer" style="width:87%">
                     <div style="float:left ; padding-top:7px" onclick="orderHeader('Name')"> Tên màu sắc </div>
                 </th>
                 <th style="width:8%"></th>
@@ -57,6 +59,9 @@
             @foreach (var item in Model.ListItem_MaterialModel)
             {
                 <tr>
+                    <td>
+                        @i
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
@@ -80,6 +85,7 @@
                     </td>
 
                 </tr>
+                i++;
             }
 
         </table>
